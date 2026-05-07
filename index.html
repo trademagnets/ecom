@@ -59,6 +59,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            padding-bottom: 80px; /* space for bottom bar when visible */
         }
 
         /* Typography */
@@ -1190,6 +1191,72 @@
             text-align: center;
         }
 
+        /* ============ BOTTOM CART BAR ============ */
+        .cart-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 950;
+            background: var(--white);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 2px solid var(--saffron-light);
+        }
+        .cart-bottom-bar.active {
+            transform: translateY(0);
+        }
+        .cart-bottom-bar .cart-summary {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .cart-bottom-bar .cart-summary span {
+            font-weight: 600;
+        }
+        .cart-bottom-bar .cart-summary .total-price {
+            color: var(--deep-red);
+            font-size: 1.2rem;
+        }
+        .cart-bottom-bar .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .cart-bottom-bar .btn-whatsapp:hover {
+            background: #1fb855;
+        }
+        .cart-bottom-bar .btn-view-cart {
+            background: none;
+            border: 2px solid var(--earthy-brown);
+            color: var(--earthy-brown);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .cart-bottom-bar .btn-view-cart:hover {
+            background: var(--earthy-brown);
+            color: white;
+        }
+
         /* ============ WHATSAPP FLOAT ============ */
         .whatsapp-float {
             position: fixed;
@@ -1270,6 +1337,10 @@
             }
             .brand-story .story-img {
                 min-height: 250px;
+            }
+            .cart-bottom-bar {
+                padding: 1rem;
+                flex-wrap: wrap;
             }
         }
         @media (max-width: 768px) {
@@ -1361,6 +1432,18 @@
             .newsletter-section {
                 padding: 2.5rem 1.5rem;
             }
+            .cart-bottom-bar {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            .cart-bottom-bar .cart-summary {
+                justify-content: center;
+            }
+            .cart-bottom-bar .btn-whatsapp {
+                justify-content: center;
+            }
         }
         @media (max-width: 480px) {
             .bestsellers-grid {
@@ -1445,7 +1528,23 @@
                 <span>Total:</span>
                 <span id="cartTotal">₹0</span>
             </div>
-            <a href="#checkout" class="btn btn-primary" onclick="alert('Checkout would be handled by Shopify/Razorpay in production.')">Proceed to Checkout</a>
+            <button class="btn btn-primary" id="sidebarWhatsAppBtn" style="width:100%;" onclick="sendOrderViaWhatsApp()">
+                <span style="display:flex;align-items:center;justify-content:center;gap:8px;">💬 Buy Now (WhatsApp)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== BOTTOM CART BAR ==================== -->
+    <div class="cart-bottom-bar" id="cartBottomBar">
+        <div class="cart-summary">
+            <span id="bottomBarItemCount">0 items</span>
+            <span class="total-price" id="bottomBarTotal">₹0</span>
+        </div>
+        <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+            <button class="btn-view-cart" onclick="openCart()">View Cart</button>
+            <a href="#" class="btn-whatsapp" id="bottomBarWhatsAppBtn" onclick="sendOrderViaWhatsApp(); return false;">
+                💬 Buy Now on WhatsApp
+            </a>
         </div>
     </div>
 
@@ -1681,7 +1780,7 @@
                         <li>Recipe卡片 included</li>
                         <li>Perfect for everyday gifting</li>
                     </ul>
-                    <button class="btn btn-primary btn-sm add-to-cart-btn" data-name="The Heritage Box" data-price="899">Add to Cart</button>
+                    <button class="btn btn-primary btn-sm add-to-cart-btn" data-name="The Heritage Box" data-price="899" data-emoji="🎁">Add to Cart</button>
                 </div>
             </div>
             <div class="gift-tier-card featured">
@@ -1696,7 +1795,7 @@
                         <li>Personalized gift message</li>
                         <li>Ideal for Diwali, Eid, Weddings</li>
                     </ul>
-                    <button class="btn btn-saffron btn-sm add-to-cart-btn" data-name="The Festive Box" data-price="2499">Add to Cart</button>
+                    <button class="btn btn-saffron btn-sm add-to-cart-btn" data-name="The Festive Box" data-price="2499" data-emoji="🌟">Add to Cart</button>
                 </div>
             </div>
             <div class="gift-tier-card">
@@ -1711,7 +1810,7 @@
                         <li>Engraved brass spoon included</li>
                         <li>For corporate &amp; luxury gifting</li>
                     </ul>
-                    <button class="btn btn-primary btn-sm add-to-cart-btn" data-name="The Premium Collection" data-price="4999">Add to Cart</button>
+                    <button class="btn btn-primary btn-sm add-to-cart-btn" data-name="The Premium Collection" data-price="4999" data-emoji="💎">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -1823,7 +1922,7 @@
                     <div class="icon">📞</div>
                     <div><strong style="color:var(--earthy-brown);">Phone</strong><br><span style="font-size:0.9rem;color:var(--text-light);">+91 99999 88888</span></div>
                 </div>
-                <a href="https://wa.me/919999988888" class="whatsapp-btn" target="_blank" rel="noopener">
+                <a href="https://wa.me/917780814739" class="whatsapp-btn" target="_blank" rel="noopener">
                     💬 Chat on WhatsApp
                 </a>
             </div>
@@ -1876,7 +1975,7 @@
     </footer>
 
     <!-- ==================== WHATSAPP FLOAT ==================== -->
-    <a href="https://wa.me/919999988888" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+    <a href="https://wa.me/917780814739" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
 
     <script>
         // ============ PRODUCT DATA ============
@@ -1897,6 +1996,7 @@
 
         // ============ CART STATE ============
         let cart = [];
+        const WHATSAPP_NUMBER = '917780814739'; // Store number
 
         function loadCart() {
             const saved = localStorage.getItem('masalabox_cart');
@@ -1912,9 +2012,12 @@
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+            // Nav cart count
             document.getElementById('cartCountNav').textContent = totalItems;
             document.getElementById('cartTotal').textContent = '₹' + totalPrice.toLocaleString('en-IN');
 
+            // Cart sidebar items
             const cartItemsEl = document.getElementById('cartItems');
             if (cart.length === 0) {
                 cartItemsEl.innerHTML =
@@ -1930,6 +2033,16 @@
                   <button class="remove-btn" onclick="removeFromCart(${idx})" title="Remove">🗑️</button>
                 </div>
               `).join('');
+            }
+
+            // Bottom bar
+            const bottomBar = document.getElementById('cartBottomBar');
+            if (totalItems > 0) {
+                bottomBar.classList.add('active');
+                document.getElementById('bottomBarItemCount').textContent = `${totalItems} item${totalItems > 1 ? 's' : ''}`;
+                document.getElementById('bottomBarTotal').textContent = '₹' + totalPrice.toLocaleString('en-IN');
+            } else {
+                bottomBar.classList.remove('active');
             }
         }
 
@@ -1968,6 +2081,27 @@
             document.getElementById('cartSidebar').classList.remove('active');
             document.getElementById('cartOverlay').classList.remove('active');
             document.body.style.overflow = '';
+        }
+
+        // ============ WHATSAPP ORDER FUNCTION ============
+        function sendOrderViaWhatsApp() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add some products first.');
+                return;
+            }
+
+            let message = 'Hello MasalaBox Co.!%0AI would like to order:%0A%0A';
+            cart.forEach(item => {
+                message += `- ${item.name} x${item.qty} (₹${item.price * item.qty})%0A`;
+            });
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            message += `%0A*Total: ₹${total.toLocaleString('en-IN')}*%0A%0APlease confirm the order and share payment details. Thank you!`;
+
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(url, '_blank');
+
+            // Optionally close sidebar after sending
+            closeCart();
         }
 
         // ============ RENDER BESTSELLERS ============
@@ -2017,7 +2151,6 @@
         const navLinks = document.getElementById('navLinks');
         const navbar = document.getElementById('navbar');
         const cartOverlay = document.getElementById('cartOverlay');
-        const cartSidebar = document.getElementById('cartSidebar');
         const cartCloseBtn = document.getElementById('cartClose');
         const cartNavBtn = document.getElementById('cartNavBtn');
 
@@ -2026,7 +2159,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close mobile nav when a link is clicked
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -2034,7 +2166,6 @@
             });
         });
 
-        // Cart open/close
         cartNavBtn.addEventListener('click', (e) => {
             e.preventDefault();
             openCart();
@@ -2042,15 +2173,12 @@
         cartCloseBtn.addEventListener('click', closeCart);
         cartOverlay.addEventListener('click', closeCart);
 
-        // Scroll behavior for navbar
         window.addEventListener('scroll', () => {
             if (window.scrollY > 80) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-
-            // Update active nav link based on scroll position
             const sections = document.querySelectorAll('section[id], .hero[id]');
             const navAs = navLinks.querySelectorAll('a[data-nav]');
             let current = 'home';
@@ -2065,6 +2193,10 @@
             });
         });
 
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeCart();
+        });
+
         // ============ INIT ============
         function init() {
             loadCart();
@@ -2074,14 +2206,8 @@
 
         document.addEventListener('DOMContentLoaded', init);
 
-        // ============ KEYBOARD ESC TO CLOSE CART ============
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeCart();
-        });
-
         console.log('🌶️ MasalaBox Co. — Premium Indian Spice Brand');
-        console.log('All sections loaded: Home | Shop | Gift Boxes | Recipes | Partner & Export | About | Contact');
-        console.log('Cart functionality active. Click "Add to Cart" on any product!');
+        console.log('Shopping cart & WhatsApp ordering ready. Store number: +91 77808 14739');
     </script>
 </body>
 </html>
