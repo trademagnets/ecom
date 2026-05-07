@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LocalBasket – Jammu Groceries + Razorpay + Shiprocket</title>
+  <title>LocalBasket – Jammu Groceries (Live Test Mode)</title>
   <!-- Razorpay checkout script -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
@@ -11,7 +11,6 @@
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fdfbf7; color: #2d2d2d; }
     :root { --primary: #1b5e20; --accent: #f4845f; --star: #f1c40f; }
 
-    /* ----- ANIMATIONS ----- */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -27,7 +26,6 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ----- HEADER (mobile first) ----- */
     header {
       background: linear-gradient(135deg, #1b5e20, #2e7d32);
       color: white; padding: 1rem 1.5rem; display: flex; flex-wrap: wrap;
@@ -54,7 +52,6 @@
     .delivery-zone select { background: transparent; border: none; color: white; font-weight: bold; outline: none; }
     .delivery-zone select option { color: #333; }
 
-    /* ----- NAVIGATION ----- */
     nav { background: white; padding: 0.5rem 1rem; overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
     .cat-list { display: flex; gap: 1.2rem; list-style: none; min-width: max-content; }
     .cat-list li {
@@ -63,7 +60,6 @@
     }
     .cat-list li:hover, .cat-list li.active { color: #1b5e20; border-bottom-color: #ff7043; }
 
-    /* ----- HERO ----- */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)),
       url('https://images.unsplash.com/photo-1596040033229-a9821ebd4a2c?w=1200&auto=format&fit=crop') center/cover;
@@ -71,7 +67,6 @@
     }
     .hero h2 { font-size: 2rem; }
 
-    /* ----- PRODUCTS ----- */
     .container { max-width: 1200px; margin: auto; padding: 1rem; }
     .section-title { font-size: 1.8rem; color: #1b5e20; margin: 2rem 0 1.5rem; }
     .products-grid {
@@ -91,7 +86,6 @@
       font-weight: 600; cursor: pointer; margin-top: auto;
     }
 
-    /* ----- CART SIDEBAR ----- */
     .cart-sidebar {
       position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%;
       background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.15); z-index: 1000;
@@ -110,7 +104,6 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; }
     .overlay.active { display: block; }
 
-    /* ----- PAYMENT MODAL (real + fake combined) ----- */
     .payment-modal {
       position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
       background: white; border-radius: 20px; padding: 2rem; z-index: 1002;
@@ -118,18 +111,16 @@
     }
     .payment-modal.active { transform: translate(-50%, -50%) scale(1); }
     .payment-modal input { width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 10px; }
-    .pay-btn { background: #1b5e20; color: white; border: none; padding: 0.9rem; border-radius: 30px; font-weight: bold; width: 100%; cursor: pointer; }
+    .pay-btn { background: #1b5e20; color: white; border: none; padding: 0.9rem; border-radius: 30px; font-weight: bold; width: 100%; cursor: pointer; margin: 0.5rem 0; }
     .success-msg { display: none; text-align: center; animation: bounceIn 0.5s; }
     .tracking-info { margin: 1rem 0; padding: 0.8rem; background: #e8f5e9; border-radius: 10px; }
 
-    /* ----- REVIEWS ----- */
     .reviews-container { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 1rem 0.5rem; margin-bottom: 2rem; }
     .review-card { min-width: 260px; background: white; padding: 1.5rem; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); scroll-snap-align: start; }
     .review-stars { color: var(--star); font-size: 1.2rem; }
     .review-text { font-style: italic; margin: 0.5rem 0; }
     .review-author { font-weight: 600; color: #1b5e20; }
 
-    /* ----- FAQ ----- */
     .faq-item { border-bottom: 1px solid #e0e0e0; margin-bottom: 0.5rem; }
     .faq-question { background: none; border: none; width: 100%; text-align: left; padding: 1rem 0; font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; }
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s; color: #555; }
@@ -211,9 +202,9 @@
 <div class="payment-modal" id="paymentModal">
   <div id="checkoutOptions">
     <h3>Choose Payment Mode</h3>
-    <button class="pay-btn" onclick="payWithRazorpay()" style="margin:0.5rem 0;">🔒 Pay with Razorpay (Live)</button>
+    <button class="pay-btn" onclick="payWithRazorpay()">🔒 Pay with Razorpay (Test Mode)</button>
     <button class="pay-btn" onclick="showFakeCardForm()" style="background:#666;">💳 Pay with Demo Card</button>
-    <button onclick="closePaymentModal()" style="background:none; color:#888; margin-top:0.5rem; width:100%;">Cancel</button>
+    <button onclick="closePaymentModal()" style="background:none; color:#888; width:100%; margin-top:0.5rem;">Cancel</button>
   </div>
   <div id="fakeCardForm" style="display:none;">
     <h3>Demo Card Payment</h3>
@@ -243,9 +234,10 @@
 
 <script>
   // ==================== CONFIGURATION ====================
-  // Set this to true if you have a real backend with Razorpay & Shiprocket
-  const USE_LIVE_API = false; // CHANGE TO true WHEN BACKEND IS READY
-  const BACKEND_URL = 'http://localhost:3000'; // Replace with your server URL
+  // Razorpay Test Key (can be safely placed in frontend)
+  const RAZORPAY_KEY = 'rzp_test_SmUfrIGt9NWD7J';
+  // IMPORTANT: The Secret Key (BBM2QymPmFkTlQU9v89E2TWI) must NEVER be exposed in frontend.
+  // It is used only on your backend for verification and order creation.
 
   // ==================== PRODUCTS ====================
   const products = [
@@ -278,7 +270,7 @@
     { q:"Where do you deliver?", a:"Jammu city same-day, pan-India 2-3 days." },
     { q:"Minimum order?", a:"₹199 for local, free pan-India above ₹499." },
     { q:"Authentic products?", a:"Yes! Directly from local farmers and artisans." },
-    { q:"Payment methods?", a:"Cards, UPI, net banking via Razorpay. COD available in select areas." },
+    { q:"Payment methods?", a:"Cards, UPI, net banking via Razorpay. COD in select areas." },
     { q:"Return policy?", a:"2 days on perishables, 7 days on dry goods." }
   ];
 
@@ -364,12 +356,16 @@
     closePaymentModal();
   };
 
+  function clearCart() {
+    cart = [];
+    updateCartUI();
+  }
+
   // ==================== CHECKOUT ====================
   function startCheckout() {
     if (cart.length === 0) return alert('Cart is empty');
     document.getElementById('paymentModal').classList.add('active');
     document.getElementById('overlay').classList.add('active');
-    // Reset display
     document.getElementById('checkoutOptions').style.display = 'block';
     document.getElementById('fakeCardForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'none';
@@ -380,7 +376,19 @@
     document.getElementById('overlay').classList.remove('active');
   }
 
-  // ----- FAKE DEMO PAYMENT (no backend) -----
+  function showSuccessScreen(paymentId) {
+    document.getElementById('checkoutOptions').style.display = 'none';
+    document.getElementById('fakeCardForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('orderDetails').innerHTML = `Payment ID: ${paymentId || 'DEMO_' + Date.now()}`;
+    // Simulated Shiprocket tracking
+    document.getElementById('trackingInfo').style.display = 'block';
+    document.getElementById('awbNumber').textContent = 'SHIP-' + Math.floor(Math.random()*1000000);
+    document.getElementById('courierName').textContent = 'Shiprocket (simulated)';
+    document.getElementById('trackingLink').href = '#';
+  }
+
+  // ----- Fake Card Payment (just demo) -----
   function showFakeCardForm() {
     document.getElementById('checkoutOptions').style.display = 'none';
     document.getElementById('fakeCardForm').style.display = 'block';
@@ -389,90 +397,45 @@
 
   function processFakePayment() {
     document.getElementById('fakeCardForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('orderDetails').innerHTML = `Order #${Date.now()}`;
-    // Simulate Shiprocket tracking
-    document.getElementById('trackingInfo').style.display = 'block';
-    document.getElementById('awbNumber').textContent = 'DEMO-' + Math.floor(Math.random()*1000000);
-    document.getElementById('courierName').textContent = 'Demo Express';
-    document.getElementById('trackingLink').href = '#';
-    showToast('Demo payment successful!');
+    showSuccessScreen('FAKE_' + Date.now());
   }
 
-  // ----- REAL RAZORPAY + SHIPROCKET INTEGRATION -----
-  async function payWithRazorpay() {
-    if (!USE_LIVE_API) {
-      alert('Set USE_LIVE_API = true and run your backend first.\nUsing demo mode instead.');
-      showFakeCardForm();
-      return;
-    }
-    const total = cart.reduce((s,i) => s + i.price*i.qty, 0);
-    try {
-      // 1. Create order on your backend
-      const orderRes = await fetch(`${BACKEND_URL}/create-order`, {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ amount: total, currency: 'INR' })
-      });
-      const orderData = await orderRes.json();
-      // 2. Open Razorpay checkout
-      const options = {
-        key: 'rzp_test_YOUR_TEST_KEY', // Replace with your Razorpay test key
-        amount: orderData.amount,
-        currency: 'INR',
-        name: 'LocalBasket',
-        description: 'Grocery order',
-        order_id: orderData.id,
-        handler: async function(response) {
-          // 3. Verify payment on backend
-          const verifyRes = await fetch(`${BACKEND_URL}/verify-payment`, {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature
-            })
-          });
-          const verifyData = await verifyRes.json();
-          if (verifyData.success) {
-            // 4. Create Shiprocket order (backend does this)
-            const shipRes = await fetch(`${BACKEND_URL}/create-shipment`, {
-              method: 'POST',
-              headers: {'Content-Type':'application/json'},
-              body: JSON.stringify({ cart, paymentId: response.razorpay_payment_id })
-            });
-            const shipData = await shipRes.json();
-            // 5. Show success
-            document.getElementById('checkoutOptions').style.display = 'none';
-            document.getElementById('fakeCardForm').style.display = 'none';
-            document.getElementById('successMsg').style.display = 'block';
-            document.getElementById('orderDetails').innerHTML = `Order #${orderData.id}<br>Payment ID: ${response.razorpay_payment_id}`;
-            if (shipData.tracking) {
-              document.getElementById('trackingInfo').style.display = 'block';
-              document.getElementById('awbNumber').textContent = shipData.tracking.awb;
-              document.getElementById('courierName').textContent = shipData.tracking.courier;
-              document.getElementById('trackingLink').href = shipData.tracking.url;
-            }
-            clearCart();
-          } else {
-            alert('Payment verification failed');
-          }
-        },
-        prefill: { name: 'Demo User', email: 'user@example.com', contact: '9999999999' },
-        theme: { color: '#1b5e20' }
-      };
-      const rzp = new Razorpay(options);
-      rzp.open();
-    } catch (err) {
-      console.error(err);
-      alert('Something went wrong. Check console.');
-    }
-  }
-
-  function clearCart() {
-    cart = [];
-    updateCartUI();
+  // ----- REAL RAZORPAY (test mode, no backend) -----
+  function payWithRazorpay() {
+    const totalAmount = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    // Open Razorpay checkout directly with test key and manual amount
+    // No order_id needed for simple test flow (order is created automatically if not provided)
+    const options = {
+      key: RAZORPAY_KEY,
+      amount: totalAmount * 100, // amount in paise
+      currency: 'INR',
+      name: 'LocalBasket',
+      description: 'Grocery order',
+      handler: function(response) {
+        // This is a test payment – no server verification required for demo
+        console.log('Payment successful:', response);
+        showSuccessScreen(response.razorpay_payment_id);
+        clearCart();
+      },
+      modal: {
+        ondismiss: function() {
+          console.log('Checkout form closed');
+        }
+      },
+      prefill: {
+        name: 'Test User',
+        email: 'test@localbasket.com',
+        contact: '9999999999'
+      },
+      notes: {
+        delivery_zone: deliveryZone
+      },
+      theme: {
+        color: '#1b5e20'
+      }
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
   }
 
   // ==================== DELIVERY ZONE ====================
@@ -503,7 +466,12 @@
   function observeReveal() {
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
   }
