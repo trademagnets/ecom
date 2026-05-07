@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LocalBasket – Modern Jammu Groceries</title>
+  <title>NutCrate – Premium Jammu Dry Fruits</title>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: #fafaf7; color: #1a1a1a; line-height: 1.4;
+      background: #fefaf5; color: #3d2e1e; line-height: 1.4;
       -webkit-tap-highlight-color: transparent;
+      scroll-behavior: smooth;
     }
     :root {
-      --primary: #1b5e20; --primary-light: #e8f5e9;
-      --accent: #ff6b35; --accent-light: #fff0e5;
-      --neutral: #f5f5f0; --border: #e2e2da;
-      --text: #1a1a1a; --text-light: #6b6b6b;
+      --primary: #7b4b1d; --primary-light: #f2e9d8;
+      --accent: #c67a2b; --accent-light: #faead7;
+      --neutral: #f5efe4; --border: #e0d4c3;
+      --text: #3d2e1e; --text-light: #8a7a6a;
       --star: #f4b400;
     }
 
+    /* ============ KEYFRAMES ============ */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -29,40 +31,62 @@
       60% { transform: scale(1.15); }
       100% { transform: scale(1); opacity: 1; }
     }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
     .reveal {
       opacity: 0; transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ============ HEADER ============ */
     header {
       background: white; padding: 0.8rem 1.2rem; display: flex;
       align-items: center; justify-content: space-between; gap: 0.8rem;
       box-shadow: 0 2px 12px rgba(0,0,0,0.04); position: sticky; top: 0;
-      z-index: 100; flex-wrap: wrap;
+      z-index: 100; flex-wrap: wrap; transition: box-shadow 0.3s;
     }
-    .logo h1 { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.3rem; }
+    header.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .logo h1 { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.3rem; transition: transform 0.2s; }
+    .logo h1:hover { transform: scale(1.02); }
     .logo span { color: var(--accent); }
     .header-actions { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; justify-content: flex-end; }
-    .search-box { display: flex; align-items: center; background: var(--neutral); border-radius: 30px; padding: 0.3rem 0.8rem; }
+    .search-box { display: flex; align-items: center; background: var(--neutral); border-radius: 30px; padding: 0.3rem 0.8rem; transition: background 0.3s, box-shadow 0.3s; }
+    .search-box:focus-within { background: white; box-shadow: 0 0 0 2px var(--accent-light); }
     .search-box input { border: none; background: transparent; padding: 0.4rem; outline: none; font-size: 0.9rem; width: 130px; }
     .delivery-chip {
       background: var(--primary-light); color: var(--primary); border-radius: 30px;
       padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 500; display: flex;
       align-items: center; gap: 0.3rem; cursor: pointer; border: none;
+      transition: background 0.3s, transform 0.2s;
     }
+    .delivery-chip:hover { background: #e6d7b4; transform: translateY(-1px); }
     .delivery-chip select { background: transparent; border: none; color: var(--primary); font-weight: 600; outline: none; font-size: 0.8rem; }
     .cart-btn {
       background: var(--accent); color: white; border-radius: 50%; width: 42px; height: 42px;
       display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-      cursor: pointer; position: relative; border: none; transition: 0.2s;
+      cursor: pointer; position: relative; border: none; transition: transform 0.2s, background 0.3s;
     }
+    .cart-btn:hover { background: #b05e1f; transform: scale(1.05); }
     .cart-count {
-      position: absolute; top: -5px; right: -5px; background: #d32f2f; color: white;
+      position: absolute; top: -5px; right: -5px; background: #b91c1c; color: white;
       border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center;
       justify-content: center; font-size: 0.65rem; font-weight: bold;
     }
 
+    /* ============ NAVIGATION ============ */
     nav {
       background: white; padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border);
       overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;
@@ -72,86 +96,110 @@
     .cat-list { display: flex; gap: 0.8rem; list-style: none; padding: 0.2rem 0; }
     .cat-list li {
       cursor: pointer; font-weight: 500; color: var(--text-light); padding: 0.3rem 0.7rem;
-      border-radius: 20px; transition: 0.2s; font-size: 0.85rem; flex-shrink: 0;
+      border-radius: 20px; transition: all 0.25s ease; font-size: 0.85rem; flex-shrink: 0;
     }
     .cat-list li.active, .cat-list li:hover {
       background: var(--primary-light); color: var(--primary); font-weight: 600;
+      transform: translateY(-1px);
     }
 
+    /* ============ HERO ============ */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-      url('https://images.unsplash.com/photo-1596040033229-a9821ebd4a2c?w=1200&auto=format&fit=crop') center/cover no-repeat;
+      url('https://images.unsplash.com/photo-1604909052743-94e838986d24?w=1200&auto=format&fit=crop') center/cover no-repeat;
       height: 50vh; min-height: 260px; display: flex; flex-direction: column;
       align-items: center; justify-content: center; color: white; text-align: center;
       padding: 1rem; border-radius: 0 0 30px 30px; margin-bottom: 1.5rem;
+      animation: slideUp 0.8s ease-out;
     }
-    .hero h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; text-shadow: 0 2px 6px rgba(0,0,0,0.2); }
-    .hero p { font-size: 1rem; opacity: 0.95; }
+    .hero h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; text-shadow: 0 2px 6px rgba(0,0,0,0.2); animation: fadeInUp 0.8s 0.2s both; }
+    .hero p { font-size: 1rem; opacity: 0.95; animation: fadeInUp 0.8s 0.4s both; }
 
+    /* ============ MAIN ============ */
     .container { max-width: 1200px; margin: auto; padding: 0.8rem; }
-    .section-title { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 1rem; display: flex; align-items: center; gap: 0.4rem; color: var(--primary); }
+    .section-title {
+      font-size: 1.4rem; font-weight: 700; margin: 2rem 0 1rem;
+      display: flex; align-items: center; gap: 0.4rem; color: var(--primary);
+      animation: fadeInUp 0.6s both;
+    }
 
+    /* ============ PRODUCT GRID ============ */
     .products-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem;
     }
     .product-card {
       background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-      transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
       border: 1px solid var(--border); cursor: pointer;
     }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
     .product-card:active { transform: scale(0.98); }
     .product-img {
       height: 140px; background-size: cover; background-position: center;
       border-bottom: 1px solid var(--border); position: relative;
+      transition: transform 0.3s;
     }
+    .product-card:hover .product-img { transform: scale(1.03); }
     .quick-add {
       position: absolute; bottom: 8px; right: 8px;
       width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,107,53,0.9); color: white; border: none;
+      background: rgba(198,122,43,0.9); color: white; border: none;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.2rem; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      cursor: pointer; transition: transform 0.2s, background 0.2s;
+      cursor: pointer; transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
       z-index: 5; backdrop-filter: blur(4px);
     }
-    .quick-add:active { transform: scale(0.95); }
+    .quick-add:hover { background: #c67a2b; transform: scale(1.15); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .quick-add:active { animation: bounceIn 0.3s; }
     .product-info { padding: 0.8rem; flex: 1; display: flex; flex-direction: column; }
-    .product-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; line-height: 1.2; }
-    .price { font-weight: 700; color: var(--primary); font-size: 1.1rem; margin: 0.2rem 0 0.6rem; }
+    .product-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; line-height: 1.2; transition: color 0.2s; }
+    .product-card:hover .product-info h4 { color: var(--primary); }
+    .price { font-weight: 700; color: var(--primary); font-size: 1.1rem; margin: 0.2rem 0 0.6rem; transition: transform 0.2s; }
+    .product-card:hover .price { transform: scale(1.02); }
 
     .cart-control-area { margin-top: auto; min-height: 38px; display: flex; align-items: center; }
     .add-btn {
       background: var(--accent); color: white; border: none; padding: 0.5rem 0.8rem;
       border-radius: 30px; font-weight: 600; font-size: 0.8rem; cursor: pointer;
-      transition: 0.2s; width: 100%; display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; width: 100%; display: flex; align-items: center; justify-content: center;
       gap: 0.3rem;
     }
+    .add-btn:hover { background: #b05e1f; transform: scale(1.02); }
+    .add-btn:active { animation: pulse 0.3s; }
     .quantity-selector {
       display: flex; align-items: center; justify-content: space-between; width: 100%;
       background: var(--accent-light); border-radius: 30px; padding: 0.2rem;
+      transition: background 0.3s;
     }
     .qty-btn {
       background: white; border: 1px solid var(--border); border-radius: 50%; width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem;
-      color: var(--accent); transition: 0.2s; font-weight: bold; flex-shrink: 0;
+      color: var(--accent); transition: all 0.2s; font-weight: bold; flex-shrink: 0;
     }
-    .qty-btn:active { background: var(--accent); color: white; border-color: var(--accent); }
+    .qty-btn:hover { background: var(--accent); color: white; border-color: var(--accent); transform: scale(1.1); }
+    .qty-btn:active { transform: scale(0.95); }
     .qty-number { font-weight: 600; font-size: 0.9rem; color: var(--text); margin: 0 0.3rem; }
 
-    /* Product Detail Modal */
+    /* ============ PRODUCT DETAIL MODAL ============ */
     .product-detail-modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
-      background: white; border-radius: 24px; padding: 1.5rem; z-index: 1002;
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0; background: white; border-radius: 24px; padding: 1.5rem; z-index: 1002;
       width: 92%; max-width: 480px; max-height: 90vh; overflow-y: auto;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
     }
-    .product-detail-modal.active { transform: translate(-50%, -50%) scale(1); }
+    .product-detail-modal.active {
+      transform: translate(-50%, -50%) scale(1); opacity: 1;
+      pointer-events: all;
+    }
     .detail-close {
       position: absolute; top: 12px; right: 16px; background: none; border: none;
-      font-size: 1.8rem; cursor: pointer; color: #888;
+      font-size: 1.8rem; cursor: pointer; color: #888; transition: color 0.2s, transform 0.2s;
     }
+    .detail-close:hover { color: #333; transform: rotate(90deg); }
     .detail-img {
       width: 100%; height: 220px; background-size: cover; background-position: center;
-      border-radius: 16px; margin-bottom: 1rem;
+      border-radius: 16px; margin-bottom: 1rem; animation: fadeInUp 0.5s both;
     }
     .detail-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; }
     .detail-price { font-size: 1.6rem; font-weight: 700; color: var(--primary); margin-bottom: 0.8rem; }
@@ -161,7 +209,9 @@
       background: var(--accent); color: white; border: none; padding: 0.8rem 2rem;
       border-radius: 30px; font-weight: 600; font-size: 1rem; cursor: pointer; width: 100%;
       display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      transition: background 0.3s, transform 0.2s;
     }
+    .detail-add-btn:hover { background: #b05e1f; transform: scale(1.02); }
     .detail-quantity-selector {
       display: flex; align-items: center; justify-content: space-between; width: 100%;
       background: var(--accent-light); border-radius: 30px; padding: 0.3rem;
@@ -169,11 +219,12 @@
     .detail-qty-btn {
       background: white; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.3rem;
-      color: var(--accent); transition: 0.2s; font-weight: bold; flex-shrink: 0;
+      color: var(--accent); transition: all 0.2s; font-weight: bold; flex-shrink: 0;
     }
-    .detail-qty-btn:active { background: var(--accent); color: white; border-color: var(--accent); }
+    .detail-qty-btn:hover { background: var(--accent); color: white; border-color: var(--accent); transform: scale(1.1); }
     .detail-qty-number { font-weight: 600; font-size: 1.1rem; color: var(--text); margin: 0 0.5rem; }
 
+    /* ============ CART SIDEBAR ============ */
     .cart-sidebar {
       position: fixed; top: 0; right: -100%; width: 100%; max-width: 420px; height: 100%;
       background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.1); z-index: 1000;
@@ -181,11 +232,13 @@
       display: flex; flex-direction: column; overflow-y: auto;
     }
     .cart-sidebar.open { right: 0; }
-    .close-cart { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #888; }
+    .close-cart { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #888; transition: color 0.2s, transform 0.2s; }
+    .close-cart:hover { color: #333; transform: rotate(90deg); }
     .cart-items { list-style: none; flex: 1; overflow-y: auto; margin: 1rem 0; }
     .cart-item {
       display: flex; justify-content: space-between; align-items: center;
       padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+      animation: fadeInUp 0.4s both;
     }
     .cart-item .qty-control {
       display: flex; align-items: center; gap: 0.4rem;
@@ -193,70 +246,91 @@
     .cart-item .qty-control button {
       background: var(--neutral); border: none; border-radius: 50%; width: 24px; height: 24px;
       display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold;
+      transition: background 0.2s, transform 0.2s;
     }
+    .cart-item .qty-control button:hover { background: #d9cdb3; transform: scale(1.15); }
     .total { font-size: 1.2rem; font-weight: 700; margin: 1rem 0; }
     .checkout-btn {
       background: var(--primary); color: white; padding: 0.8rem; border: none; border-radius: 30px;
-      font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; transition: 0.2s;
+      font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; transition: background 0.3s, transform 0.2s;
     }
-    .checkout-btn:active { background: #154419; }
+    .checkout-btn:hover { background: #5c3816; transform: translateY(-1px); }
+
+    /* ============ OVERLAY ============ */
     .overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.4); z-index: 999; display: none; backdrop-filter: blur(2px);
+      transition: opacity 0.3s;
     }
     .overlay.active { display: block; }
 
+    /* ============ FLOATING CART ============ */
     .floating-cart {
       position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px;
       background: var(--accent); border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; box-shadow: 0 6px 20px rgba(255,107,53,0.4);
-      cursor: pointer; z-index: 1100; transition: transform 0.2s; border: none;
+      justify-content: center; box-shadow: 0 6px 20px rgba(198,122,43,0.4);
+      cursor: pointer; z-index: 1100; transition: transform 0.2s, box-shadow 0.3s; border: none;
     }
+    .floating-cart:hover { transform: scale(1.08); box-shadow: 0 8px 25px rgba(198,122,43,0.5); }
     .floating-cart:active { transform: scale(0.95); }
     .floating-cart-icon { font-size: 26px; }
     .floating-cart .badge {
-      position: absolute; top: -5px; right: -5px; background: #d32f2f; color: white;
+      position: absolute; top: -5px; right: -5px; background: #b91c1c; color: white;
       border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center;
       justify-content: center; font-size: 0.7rem; font-weight: bold; border: 2px solid white;
     }
 
+    /* ============ PAYMENT MODAL ============ */
     .payment-modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
-      background: white; border-radius: 20px; padding: 1.5rem; z-index: 1002;
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0; background: white; border-radius: 20px; padding: 1.5rem; z-index: 1002;
       width: 90%; max-width: 380px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease; max-height: 90vh; overflow-y: auto;
+      transition: transform 0.3s ease, opacity 0.3s ease; max-height: 90vh; overflow-y: auto;
+      pointer-events: none;
     }
-    .payment-modal.active { transform: translate(-50%, -50%) scale(1); }
-    .payment-modal input { width: 100%; padding: 0.7rem; margin: 0.4rem 0; border: 1px solid var(--border); border-radius: 12px; font-size: 0.9rem; }
+    .payment-modal.active {
+      transform: translate(-50%, -50%) scale(1); opacity: 1;
+      pointer-events: all;
+    }
+    .payment-modal input { width: 100%; padding: 0.7rem; margin: 0.4rem 0; border: 1px solid var(--border); border-radius: 12px; font-size: 0.9rem; transition: border-color 0.3s; }
+    .payment-modal input:focus { border-color: var(--accent); outline: none; }
     .pay-btn {
       background: var(--primary); color: white; border: none; padding: 0.8rem; border-radius: 30px;
-      font-weight: 700; width: 100%; cursor: pointer; margin: 0.4rem 0; transition: 0.2s; font-size: 0.9rem;
+      font-weight: 700; width: 100%; cursor: pointer; margin: 0.4rem 0; transition: background 0.3s, transform 0.2s; font-size: 0.9rem;
     }
-    .pay-btn:active { background: #154419; }
+    .pay-btn:hover { background: #5c3816; transform: translateY(-1px); }
+    .pay-btn.alt { background: #888; }
+    .pay-btn.alt:hover { background: #666; }
     .success-msg { display: none; text-align: center; animation: bounceIn 0.5s; }
     .tracking-info { margin: 1rem 0; padding: 0.7rem; background: var(--primary-light); border-radius: 12px; font-size: 0.85rem; }
 
+    /* ============ REVIEWS ============ */
     .reviews-container { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.8rem 0; -webkit-overflow-scrolling: touch; }
     .review-card {
       min-width: 230px; background: white; padding: 1.2rem; border-radius: 16px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.03); scroll-snap-align: start; border: 1px solid var(--border);
-      font-size: 0.9rem;
+      font-size: 0.9rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .review-stars { color: var(--star); font-size: 1rem; margin-bottom: 0.4rem; }
-    .review-text { font-style: italic; margin-bottom: 0.6rem; color: #444; }
-    .review-author { font-weight: 600; color: var(--primary); }
+    .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.06); }
+    .review-stars { color: var(--star); font-size: 1rem; margin-bottom: 0.4rem; transition: transform 0.2s; }
+    .review-card:hover .review-stars { transform: scale(1.1); }
 
+    /* ============ FAQ ============ */
     .faq-item { border-bottom: 1px solid var(--border); margin-bottom: 0.5rem; }
     .faq-question {
       background: none; border: none; width: 100%; text-align: left; padding: 0.8rem 0;
       font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between;
+      transition: color 0.3s;
     }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s; color: #555; padding-left: 0.5rem; font-size: 0.9rem; }
+    .faq-question:hover { color: var(--accent); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: #555; padding-left: 0.5rem; font-size: 0.9rem; }
     .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 0.8rem; }
+    .faq-item .icon { transition: transform 0.3s ease; }
     .faq-item.active .icon { transform: rotate(45deg); }
 
     footer { background: white; border-top: 1px solid var(--border); text-align: center; padding: 1.2rem; color: #888; margin-top: 2rem; font-size: 0.85rem; }
 
+    /* ============ MOBILE ============ */
     @media (max-width: 480px) {
       header { padding: 0.6rem 1rem; }
       .logo h1 { font-size: 1.3rem; }
@@ -290,10 +364,10 @@
 </button>
 
 <!-- Header -->
-<header class="reveal">
-  <div class="logo"><h1>🌿 Local<span>Basket</span></h1></div>
+<header class="reveal" id="mainHeader">
+  <div class="logo"><h1>🥜 Nut<span>Crate</span></h1></div>
   <div class="header-actions">
-    <div class="search-box"><input type="text" placeholder="Search..."></div>
+    <div class="search-box"><input type="text" placeholder="Search dry fruits..."></div>
     <div class="delivery-chip">
       <span>📍</span>
       <select id="deliverySelect" onchange="updateDeliveryZone()">
@@ -311,22 +385,23 @@
 <nav class="reveal">
   <ul class="cat-list" id="categoryList">
     <li class="active">All</li>
-    <li>Grocery & Staples</li>
-    <li>Local Specialties</li>
-    <li>Dry Fruits & Seeds</li>
-    <li>Snacks & Beverages</li>
-    <li>Household</li>
+    <li>Almonds</li>
+    <li>Walnuts</li>
+    <li>Cashews</li>
+    <li>Pistachios</li>
+    <li>Dates & Raisins</li>
+    <li>Mixed & Gifts</li>
   </ul>
 </nav>
 
 <!-- Cover Image Hero -->
 <div class="hero reveal">
-  <h2>The True Taste of Jammu</h2>
-  <p>Handpicked local groceries, delivered fresh.</p>
+  <h2>Nature’s Finest Dry Fruits</h2>
+  <p>From the orchards of Jammu, to your doorstep.</p>
 </div>
 
 <main class="container">
-  <h3 class="section-title reveal">🌟 Trending Now</h3>
+  <h3 class="section-title reveal">🌟 Best Sellers</h3>
   <div class="products-grid" id="productsContainer"></div>
 
   <h3 class="section-title reveal" style="margin-top: 2.5rem;">💬 Customer Love</h3>
@@ -345,7 +420,7 @@
 <!-- Cart Sidebar -->
 <div class="cart-sidebar" id="cartSidebar">
   <button class="close-cart" onclick="toggleCart()">✕</button>
-  <h3>Your Basket</h3>
+  <h3>Your Crate</h3>
   <ul class="cart-items" id="cartItems"></ul>
   <div class="total" id="cartTotal">Total: ₹0</div>
   <button class="checkout-btn" onclick="startCheckout()">Proceed to Pay ₹</button>
@@ -356,16 +431,16 @@
   <div id="checkoutOptions">
     <h3>Secure Checkout</h3>
     <button class="pay-btn" onclick="payWithRazorpay()">🔒 Pay with Razorpay (Test)</button>
-    <button class="pay-btn" onclick="showFakeCardForm()" style="background:#888;">💳 Demo Card Pay</button>
-    <button onclick="closeAllModals()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none;">Cancel</button>
+    <button class="pay-btn alt" onclick="showFakeCardForm()">💳 Demo Card Pay</button>
+    <button onclick="closeAllModals()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none; cursor:pointer;">Cancel</button>
   </div>
   <div id="fakeCardForm" style="display:none;">
     <h3>Demo Card</h3>
     <input type="text" placeholder="Card Number" value="4111 1111 1111 1111">
     <input type="text" placeholder="Name">
-    <div style="display:flex; gap:0.5rem;"><input id="mm" placeholder="MM/YY" value="12/26"><input id="cvv" placeholder="CVV" value="123"></div>
+    <div style="display:flex; gap:0.5rem;"><input placeholder="MM/YY" value="12/26"><input placeholder="CVV" value="123"></div>
     <button class="pay-btn" onclick="processFakePayment()">Pay ₹<span id="demoAmount"></span></button>
-    <button onclick="closeAllModals()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none;">Cancel</button>
+    <button onclick="closeAllModals()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none; cursor:pointer;">Cancel</button>
   </div>
   <div class="success-msg" id="successMsg">
     <div style="font-size:2.5rem;">✅</div>
@@ -381,74 +456,62 @@
   </div>
 </div>
 
-<footer class="reveal">© LocalBasket — From Jammu with Love ❤️</footer>
+<footer class="reveal">© NutCrate — Premium Dry Fruits from Jammu 🌰</footer>
 
 <script>
   const RAZORPAY_KEY = 'rzp_test_SmUfrIGt9NWD7J';
 
   const products = [
-    { id:1, name:"Basmati Rice – Premium", price:110, category:"Grocery & Staples", desc:"Long-grain aromatic rice from Jammu's finest fields.", img:"https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
-    { id:2, name:"Desi Ghee (1L)", price:480, category:"Grocery & Staples", desc:"Pure cow ghee, traditionally churned, rich in flavour.", img:"https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400" },
-    { id:3, name:"Rajma Chitra", price:145, category:"Grocery & Staples", desc:"Creamy Jammu red kidney beans, perfect for curries.", img:"https://images.unsplash.com/photo-1551462147-ff2907bfdce1?w=400" },
-    { id:4, name:"Udhampur Kaladi Cheese", price:220, category:"Local Specialties", desc:"Traditional local cheese, mildly spiced, great for grilling.", img:"https://images.unsplash.com/photo-1634487359989-3e90c9432133?w=400" },
-    { id:5, name:"Akhnoor Milk Cake", price:260, category:"Local Specialties", desc:"Famous sweet delight from Akhnoor, soft and milky.", img:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400" },
-    { id:6, name:"Kashmiri Walnuts (500g)", price:350, category:"Dry Fruits & Seeds", desc:"Handpicked premium walnuts, rich in omega-3.", img:"https://images.unsplash.com/photo-1572384066832-1a7d47e7d042?w=400" },
-    { id:7, name:"Almonds (Mamra)", price:290, category:"Dry Fruits & Seeds", desc:"Crunchy mamra almonds, directly from the valleys.", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
-    { id:8, name:"Jammu Tikki Masala", price:85, category:"Snacks & Beverages", desc:"Authentic spice blend for street-style tikkis.", img:"https://images.unsplash.com/photo-1596040033229-a9821ebd4a2c?w=400" },
-    { id:9, name:"Patisa (Sweet Flaky)", price:170, category:"Snacks & Beverages", desc:"Traditional layered sweet made with pure ghee.", img:"https://images.unsplash.com/photo-1558961363-fa8fdf8fe77f?w=400" },
-    { id:10, name:"Local Honey (250g)", price:210, category:"Snacks & Beverages", desc:"Raw wild honey collected from Jammu forests.", img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400" },
-    { id:11, name:"Saffron (Kesar) 1g", price:295, category:"Dry Fruits & Seeds", desc:"Pure Kashmiri saffron strands, intense aroma.", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
-    { id:12, name:"Mustard Oil (1L)", price:160, category:"Grocery & Staples", desc:"Cold-pressed mustard oil for authentic cooking.", img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87fe?w=400" },
-    { id:13, name:"Pickles (Mango/Chilli)", price:130, category:"Local Specialties", desc:"Homemade pickles with traditional spices.", img:"https://images.unsplash.com/photo-1589301762247-123df22c18c9?w=400" },
-    { id:14, name:"Rusk (Suhali) 400g", price:90, category:"Snacks & Beverages", desc:"Crispy sweet rusks perfect with tea.", img:"https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=400" },
-    { id:15, name:"Fruit Chaat Masala", price:70, category:"Snacks & Beverages", desc:"Tangy spice mix for refreshing fruit chaats.", img:"https://images.unsplash.com/photo-1532336414038-9b0d6c1765f7?w=400" },
-    { id:16, name:"Handmade Soap", price:120, category:"Household", desc:"Natural herbal soap crafted by local artisans.", img:"https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=400" }
+    { id:1, name:"Kashmiri Mamra Almonds", price:650, category:"Almonds", desc:"Premium handpicked mamra almonds, rich in nutrients.", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
+    { id:2, name:"Kashmiri Walnuts (500g)", price:350, category:"Walnuts", desc:"Organic walnuts, freshly cracked, high in omega-3.", img:"https://images.unsplash.com/photo-1572384066832-1a7d47e7d042?w=400" },
+    { id:3, name:"W240 Cashew Nuts", price:580, category:"Cashews", desc:"Jumbo whole cashews, creamy and crunchy.", img:"https://images.unsplash.com/photo-1573496130141-209d200ce24b?w=400" },
+    { id:4, name:"Salted Pistachios (Roasted)", price:720, category:"Pistachios", desc:"Lightly salted, roasted pistachios in shell.", img:"https://images.unsplash.com/photo-1623091411395-09e79bdb1b79?w=400" },
+    { id:5, name:"Medjool Dates (Premium)", price:890, category:"Dates & Raisins", desc:"Soft, king-sized dates, naturally sweet.", img:"https://images.unsplash.com/photo-1606923829579-0cb981a83e2f?w=400" },
+    { id:6, name:"Golden Raisins", price:240, category:"Dates & Raisins", desc:"Sun-dried golden raisins, plump and juicy.", img:"https://images.unsplash.com/photo-1596363505729-4190d9581f7b?w=400" },
+    { id:7, name:"Mixed Dry Fruit Box", price:550, category:"Mixed & Gifts", desc:"A festive mix of almonds, cashews & pistachios.", img:"https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=400" },
+    { id:8, name:"Trail Mix (Spicy)", price:410, category:"Mixed & Gifts", desc:"A spicy blend of nuts, seeds, & dried berries.", img:"https://images.unsplash.com/photo-1508060797205-d21a84617ecf?w=400" },
+    { id:9, name:"Kashmiri Walnut Kernels", price:420, category:"Walnuts", desc:"Pure walnut halves, no shell, ready to eat.", img:"https://images.unsplash.com/photo-1572384066832-1a7d47e7d042?w=400" },
+    { id:10, name:"Afghani Cashews", price:620, category:"Cashews", desc:"Extra-large premium cashews from Afghanistan.", img:"https://images.unsplash.com/photo-1573496130141-209d200ce24b?w=400" },
+    { id:11, name:"Honey Roasted Almonds", price:480, category:"Almonds", desc:"Sweet & salty almonds, perfect for snacking.", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
+    { id:12, name:"Iranian Pistachios", price:820, category:"Pistachios", desc:"World-famous long pistachios, naturally opened.", img:"https://images.unsplash.com/photo-1623091411395-09e79bdb1b79?w=400" }
   ];
 
   const reviews = [
-    { stars:5, text:"The Kaladi cheese is absolutely authentic!", author:"Rohit S." },
-    { stars:5, text:"Quick same-day delivery, fresh products.", author:"Ananya G." },
-    { stars:4, text:"Loved the spices and saffron. Taste of home.", author:"Vikram P." },
-    { stars:5, text:"Best ghee I've ever ordered online.", author:"Neha R." }
+    { stars:5, text:"Finest almonds I've ever tasted, super fresh!", author:"Rohit S." },
+    { stars:5, text:"The mixed box was a hit at Diwali, loved the packaging.", author:"Ananya G." },
+    { stars:4, text:"Dates are incredible, melt in the mouth.", author:"Vikram P." },
+    { stars:5, text:"Quick delivery and premium quality walnuts.", author:"Neha R." }
   ];
 
   const faqs = [
     { q:"Where do you deliver?", a:"Jammu city same-day, pan-India 2-3 days." },
     { q:"Minimum order?", a:"₹199 for local, free pan-India above ₹499." },
-    { q:"Authentic products?", a:"Yes! Directly from local farmers and artisans." },
+    { q:"Are these organic?", a:"Most products are sourced from organic orchards. Check product details." },
     { q:"Payment methods?", a:"Cards, UPI, net banking via Razorpay. COD in select areas." },
-    { q:"Return policy?", a:"2 days on perishables, 7 days on dry goods." }
+    { q:"Return policy?", a:"7-day replacement if quality is not up to mark." }
   ];
 
   let cart = [];
   let deliveryZone = 'local';
   let openProductId = null;
 
-  function getCartQty(id) {
-    const item = cart.find(i => i.id === id);
-    return item ? item.qty : 0;
-  }
+  function getCartQty(id) { return (cart.find(i => i.id === id) || {qty:0}).qty; }
 
   function addToCart(id) {
     const product = products.find(p => p.id === id);
     const existing = cart.find(i => i.id === id);
-    if (existing) existing.qty++;
-    else cart.push({...product, qty: 1});
+    if (existing) existing.qty++; else cart.push({...product, qty: 1});
     updateCartAndUI();
     showToast(`${product.name} added`);
-    const floatBtn = document.getElementById('floatingCartBtn');
-    floatBtn.style.animation = 'bounceIn 0.5s';
-    setTimeout(() => floatBtn.style.animation = '', 500);
+    document.getElementById('floatingCartBtn').classList.add('pulse-animation');
+    setTimeout(() => document.getElementById('floatingCartBtn').classList.remove('pulse-animation'), 300);
   }
 
   function decreaseQty(id) {
     const existing = cart.find(i => i.id === id);
     if (!existing) return;
-    if (existing.qty > 1) {
-      existing.qty--;
-    } else {
-      cart = cart.filter(i => i.id !== id);
-    }
+    if (existing.qty > 1) existing.qty--;
+    else cart = cart.filter(i => i.id !== id);
     updateCartAndUI();
   }
 
@@ -464,7 +527,7 @@
     document.getElementById('floatingBadge').textContent = totalItems;
     const list = document.getElementById('cartItems');
     if (cart.length === 0) {
-      list.innerHTML = '<li style="text-align:center; color:#888; padding: 2rem;">Your basket is empty</li>';
+      list.innerHTML = '<li style="text-align:center; color:#888; padding: 2rem;">Your crate is empty</li>';
     } else {
       list.innerHTML = cart.map(item => `
         <li class="cart-item">
@@ -496,9 +559,7 @@
             <div class="price">₹${p.price}</div>
             <div class="cart-control-area" onclick="event.stopPropagation();">
               ${qty === 0 ? `
-                <button class="add-btn" onclick="addToCart(${p.id})">
-                  <span>+</span> Add
-                </button>
+                <button class="add-btn" onclick="addToCart(${p.id})"><span>+</span> Add</button>
               ` : `
                 <div class="quantity-selector">
                   <button class="qty-btn" onclick="decreaseQty(${p.id})">−</button>
@@ -514,19 +575,18 @@
     observeReveal();
   }
 
-  // ----- Product Detail Modal -----
   function openProductDetail(id) {
     openProductId = id;
     const product = products.find(p => p.id === id);
     const qty = getCartQty(id);
-    const detailHtml = `
+    document.getElementById('detailContent').innerHTML = `
       <div class="detail-img" style="background-image: url('${product.img}')"></div>
       <div class="detail-name">${product.name}</div>
       <div class="detail-price">₹${product.price}</div>
       <p class="detail-desc">${product.desc}</p>
       <div class="detail-control-area">
         ${qty === 0 ? `
-          <button class="detail-add-btn" onclick="addToCart(${id})">+ Add to Cart</button>
+          <button class="detail-add-btn" onclick="addToCart(${id})">+ Add to Crate</button>
         ` : `
           <div class="detail-quantity-selector">
             <button class="detail-qty-btn" onclick="decreaseQty(${id})">−</button>
@@ -536,14 +596,8 @@
         `}
       </div>
     `;
-    document.getElementById('detailContent').innerHTML = detailHtml;
     document.getElementById('productDetailModal').classList.add('active');
     document.getElementById('overlay').classList.add('active');
-  }
-
-  function closeProductDetail() {
-    document.getElementById('productDetailModal').classList.remove('active');
-    openProductId = null;
   }
 
   function refreshProductDetailIfOpen() {
@@ -590,12 +644,8 @@
     document.getElementById('overlay').classList.toggle('active');
   }
 
-  function clearCart() {
-    cart = [];
-    updateCartAndUI();
-  }
+  function clearCart() { cart = []; updateCartAndUI(); }
 
-  // Checkout
   function startCheckout() {
     if (cart.length === 0) return alert('Cart is empty');
     document.getElementById('paymentModal').classList.add('active');
@@ -633,15 +683,15 @@
       key: RAZORPAY_KEY,
       amount: totalAmount * 100,
       currency: 'INR',
-      name: 'LocalBasket',
-      description: 'Grocery order',
+      name: 'NutCrate',
+      description: 'Dry fruits order',
       handler: function(response) {
         showSuccessScreen(response.razorpay_payment_id);
         clearCart();
       },
-      prefill: { name: 'Test User', email: 'test@localbasket.com', contact: '9999999999' },
+      prefill: { name: 'Test User', email: 'test@nutcrate.com', contact: '9999999999' },
       notes: { delivery_zone: deliveryZone },
-      theme: { color: '#1b5e20' }
+      theme: { color: '#7b4b1d' }
     };
     new Razorpay(options).open();
   }
@@ -662,7 +712,7 @@
   function showToast(msg) {
     const toast = document.createElement('div');
     toast.textContent = msg;
-    toast.style = 'position:fixed; bottom:20px; left:20px; background:#1b5e20; color:white; padding:0.7rem 1.2rem; border-radius:30px; z-index:2000; animation:fadeInUp 0.3s; font-weight:500; font-size:0.9rem;';
+    toast.style = 'position:fixed; bottom:20px; left:20px; background:#7b4b1d; color:white; padding:0.7rem 1.2rem; border-radius:30px; z-index:2000; animation:fadeInUp 0.3s; font-weight:500; font-size:0.9rem;';
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 2500);
   }
@@ -680,7 +730,12 @@
     reveals.forEach(el => observer.observe(el));
   }
 
-  // Init
+  // Add pulse class support
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `.pulse-animation { animation: pulse 0.3s; }`;
+  document.head.appendChild(styleSheet);
+
+  // Initial renders
   renderProducts();
   renderReviews();
   renderFAQ();
