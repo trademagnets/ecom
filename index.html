@@ -79,14 +79,16 @@
       background: var(--primary-light); color: var(--primary); font-weight: 600;
     }
 
-    /* Hero */
+    /* Cover Image Hero */
     .hero {
-      background: linear-gradient(105deg, #1b5e20 0%, #2e7d32 100%);
-      color: white; text-align: center; padding: 3rem 1.5rem; border-radius: 0 0 40px 40px;
-      margin-bottom: 2rem;
+      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+      url('https://images.unsplash.com/photo-1596040033229-a9821ebd4a2c?w=1200&auto=format&fit=crop') center/cover no-repeat;
+      height: 70vh; min-height: 420px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; color: white; text-align: center;
+      padding: 2rem; border-radius: 0 0 40px 40px; margin-bottom: 2rem;
     }
-    .hero h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .hero p { font-size: 1.1rem; opacity: 0.9; }
+    .hero h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.8rem; text-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    .hero p { font-size: 1.2rem; opacity: 0.95; margin-bottom: 1.5rem; }
 
     /* Main Container */
     .container { max-width: 1200px; margin: auto; padding: 1rem; }
@@ -104,8 +106,21 @@
     .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.06); }
     .product-img {
       height: 200px; background-size: cover; background-position: center;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); position: relative;
     }
+    /* Floating quick‑add icon on product image */
+    .quick-add {
+      position: absolute; bottom: 10px; right: 10px;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,107,53,0.9); color: white; border: none;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      cursor: pointer; transition: transform 0.2s, background 0.2s;
+      z-index: 5; backdrop-filter: blur(4px);
+    }
+    .quick-add:hover { background: #ff6b35; transform: scale(1.1); }
+    .quick-add:active { transform: scale(0.95); }
+
     .product-info { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
     .product-info h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
     .price { font-weight: 700; color: var(--primary); font-size: 1.3rem; margin: 0.3rem 0 0.8rem; }
@@ -223,15 +238,22 @@
 
     footer { background: white; border-top: 1px solid var(--border); text-align: center; padding: 1.5rem; color: #888; margin-top: 2rem; }
 
+    /* Mobile optimizations */
     @media (max-width: 768px) {
+      .hero { height: 50vh; min-height: 320px; }
+      .hero h2 { font-size: 1.8rem; }
       .products-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
       .product-img { height: 150px; }
-      .hero { padding: 2rem 1rem; }
-      .hero h2 { font-size: 1.7rem; }
       .floating-cart { width: 55px; height: 55px; bottom: 16px; right: 16px; }
+      .quick-add { width: 32px; height: 32px; font-size: 1rem; bottom: 8px; right: 8px; }
+      .logo h1 { font-size: 1.4rem; }
+      .header-actions { width: 100%; justify-content: space-between; }
     }
     @media (max-width: 480px) {
       .products-grid { grid-template-columns: 1fr 1fr; }
+      .product-card { border-radius: 16px; }
+      .product-info { padding: 1rem; }
+      .section-title { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -274,7 +296,7 @@
   </ul>
 </nav>
 
-<!-- Hero -->
+<!-- Cover Image Hero -->
 <div class="hero reveal">
   <h2>The True Taste of Jammu</h2>
   <p>Handpicked local groceries, delivered fresh.</p>
@@ -372,7 +394,6 @@
   let cart = [];
   let deliveryZone = 'local';
 
-  // Get product quantity in cart
   function getCartQty(id) {
     const item = cart.find(i => i.id === id);
     return item ? item.qty : 0;
@@ -385,6 +406,10 @@
     else cart.push({...product, qty: 1});
     updateCartAndUI();
     showToast(`${product.name} added`);
+    // Bounce floating cart
+    const floatBtn = document.getElementById('floatingCartBtn');
+    floatBtn.style.animation = 'bounceIn 0.5s';
+    setTimeout(() => floatBtn.style.animation = '', 500);
   }
 
   function removeFromCart(id) {
@@ -438,7 +463,9 @@
       const qty = getCartQty(p.id);
       return `
         <div class="product-card reveal">
-          <div class="product-img" style="background-image: url('${p.img}')"></div>
+          <div class="product-img" style="background-image: url('${p.img}')">
+            <button class="quick-add" onclick="addToCart(${p.id})" aria-label="Quick add">+</button>
+          </div>
           <div class="product-info">
             <h4>${p.name}</h4>
             <div class="price">₹${p.price}</div>
