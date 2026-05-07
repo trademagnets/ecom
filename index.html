@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasalaBox Co. — Premium Indian Spices | Farm to Kitchen</title>
+    <meta name="description" content="Authentic Indian spices, handcrafted blends, premium gift boxes, and B2B export. Pure, farm-sourced, no preservatives. Taste the heritage.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --saffron: #E8A020;
+            --saffron-light: #f5d078;
+            --saffron-pale: #fff8e7;
+            --deep-red: #8B1A1A;
+            --deep-red-light: #a83232;
+            --earthy-brown: #5C3317;
+            --earthy-brown-light: #7d4a2c;
+            --cream: #FAF6EF;
+            --cream-dark: #f0e8d5;
+            --forest-green: #2D5016;
+            --forest-green-light: #3d6b1f;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #6b6b6b;
+            --border-soft: #e8e0d5;
+            --shadow-sm: 0 2px 8px rgba(92, 51, 23, 0.06);
+            --shadow-md: 0 4px 20px rgba(92, 51, 23, 0.10);
+            --shadow-lg: 0 8px 40px rgba(92, 51, 23, 0.14);
+            --shadow-xl: 0 16px 56px rgba(92, 51, 23, 0.18);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1280px;
+            --header-height: 72px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--header-height);
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif {
+            font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+        h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            line-height: 1.15;
+            color: var(--deep-red);
+        }
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            line-height: 1.25;
+            color: var(--earthy-brown);
+        }
+        h3 {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            line-height: 1.3;
+        }
+        .accent-label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--saffron);
+        }
+        .accent-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 50px;
+            background: var(--saffron-pale);
+            color: var(--earthy-brown);
+        }
+        p {
+            color: var(--text-medium);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ============ NAVIGATION ============ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 246, 239, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-soft);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .nav.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--deep-red);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-logo .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--saffron);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.3rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--earthy-brown);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.55rem 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.01em;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--saffron-pale);
+            color: var(--deep-red);
+            font-weight: 600;
+        }
+        .nav-cta {
+            background: var(--deep-red) !important;
+            color: var(--white) !important;
+            font-weight: 600 !important;
+            padding: 0.55rem 1.4rem !important;
+            border-radius: 50px !important;
+            transition: var(--transition);
+            font-size: 0.85rem !important;
+        }
+        .nav-cta:hover {
+            background: var(--deep-red-light) !important;
+            color: var(--white) !important;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+        .hamburger span {
+            width: 26px;
+            height: 2.5px;
+            background: var(--earthy-brown);
+            border-radius: 3px;
+            transition: var(--transition);
+            display: block;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ============ SECTIONS ============ */
+        .section {
+            padding: 5rem 2rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        .section-full {
+            padding: 5rem 2rem;
+            max-width: 100%;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .section-header .accent-label {
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .section-header h2 {
+            margin-bottom: 0.8rem;
+        }
+        .section-header p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(160deg,
+                    #fdf8ef 0%, #faf3e2 25%, #f5e8d0 50%, #faf3e2 75%, #fdf8ef 100%);
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: var(--header-height);
+        }
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+            background-image: radial-gradient(circle at 25% 25%, var(--saffron) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, var(--deep-red) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        .hero-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+        .hero-content .accent-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+        }
+        .hero-content h1 {
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+        }
+        .hero-content h1 span {
+            color: var(--saffron);
+            position: relative;
+        }
+        .hero-content h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(232, 160, 32, 0.25);
+            border-radius: 4px;
+            z-index: -1;
+        }
+        .hero-content p {
+            font-size: 1.15rem;
+            max-width: 480px;
+            color: var(--text-medium);
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.02em;
+            text-align: center;
+        }
+        .btn-primary {
+            background: var(--deep-red);
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-primary:hover {
+            background: var(--deep-red-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--earthy-brown);
+            border: 2px solid var(--earthy-brown);
+        }
+        .btn-outline:hover {
+            background: var(--earthy-brown);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .btn-saffron {
+            background: var(--saffron);
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-saffron:hover {
+            background: #d49218;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-sm {
+            padding: 0.55rem 1.3rem;
+            font-size: 0.8rem;
+        }
+        .hero-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .hero-image .image-wrapper {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, #f5e0b7, #e8c97a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+        .hero-image .floating-spice {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: floatSpice 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .hero-image .floating-spice:nth-child(2) {
+            top: 8%;
+            right: 5%;
+            animation-delay: 0.7s;
+            font-size: 3rem;
+        }
+        .hero-image .floating-spice:nth-child(3) {
+            bottom: 12%;
+            left: 3%;
+            animation-delay: 1.4s;
+            font-size: 2rem;
+        }
+        .hero-image .floating-spice:nth-child(4) {
+            top: 40%;
+            right: -5%;
+            animation-delay: 2.1s;
+            font-size: 2.8rem;
+        }
+        @keyframes floatSpice {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-22px) rotate(8deg);
+            }
+        }
+
+        /* ============ BRAND PROMISE STRIP ============ */
+        .promise-strip {
+            background: var(--white);
+            border-top: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 2rem 2rem;
+        }
+        .promise-strip-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .promise-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .promise-item .icon {
+            width: 56px;
+            height: 56px;
+            background: var(--saffron-pale);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+        .promise-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--earthy-brown);
+        }
+
+        /* ============ FEATURED COLLECTIONS ============ */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .collection-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        .collection-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        .collection-card .card-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .collection-card:nth-child(1) .card-img {
+            background: linear-gradient(135deg, #fdf0d5, #f5d078);
+        }
+        .collection-card:nth-child(2) .card-img {
+            background: linear-gradient(135deg, #fce8e8, #f5c6c6);
+        }
+        .collection-card:nth-child(3) .card-img {
+            background: linear-gradient(135deg, #e8f0e0, #c5d8b5);
+        }
+        .collection-card:nth-child(4) .card-img {
+            background: linear-gradient(135deg, #f5ece0, #e0cfb5);
+        }
+        .collection-card .card-body {
+            padding: 1.3rem;
+        }
+        .collection-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--earthy-brown);
+        }
+        .collection-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ============ BESTSELLERS ============ */
+        .bestsellers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .product-card .badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 3;
+            background: var(--saffron);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 50px;
+        }
+        .product-card .product-img {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+        }
+        .product-card:nth-child(1) .product-img {
+            background: #fdf3e0;
+        }
+        .product-card:nth-child(2) .product-img {
+            background: #fceeed;
+        }
+        .product-card:nth-child(3) .product-img {
+            background: #fef9f0;
+        }
+        .product-card:nth-child(4) .product-img {
+            background: #f5efe5;
+        }
+        .product-card:nth-child(5) .product-img {
+            background: #fdf5e6;
+        }
+        .product-card:nth-child(6) .product-img {
+            background: #fef8f0;
+        }
+        .product-card .product-body {
+            padding: 1.2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .product-card .product-body h3 {
+            font-size: 1rem;
+            color: var(--earthy-brown);
+            margin: 0;
+        }
+        .product-card .stars {
+            color: var(--saffron);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+        .product-card .price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--deep-red);
+        }
+        .product-card .price .original {
+            text-decoration: line-through;
+            color: #aaa;
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-left: 6px;
+        }
+        .product-card .btn {
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* ============ BRAND STORY ============ */
+        .brand-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .brand-story .story-img {
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            background: linear-gradient(160deg, #f5e0c0, #e8d5b0);
+        }
+        .brand-story .story-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .brand-story .story-content h2 {
+            color: var(--deep-red);
+        }
+
+        /* ============ RECIPE HIGHLIGHTS ============ */
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+        }
+        .recipe-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .recipe-card .recipe-img {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .recipe-card:nth-child(1) .recipe-img {
+            background: #fdf3e0;
+        }
+        .recipe-card:nth-child(2) .recipe-img {
+            background: #fceeed;
+        }
+        .recipe-card:nth-child(3) .recipe-img {
+            background: #eef5e8;
+        }
+        .recipe-card .recipe-body {
+            padding: 1.2rem;
+        }
+        .recipe-card .recipe-body h3 {
+            font-size: 1rem;
+            color: var(--earthy-brown);
+            margin-bottom: 0.3rem;
+        }
+        .recipe-card .recipe-body p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* ============ TESTIMONIALS ============ */
+        .testimonials-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0 2rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .testimonials-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .testimonials-scroll::-webkit-scrollbar-track {
+            background: var(--border-soft);
+            border-radius: 10px;
+        }
+        .testimonials-scroll::-webkit-scrollbar-thumb {
+            background: var(--saffron);
+            border-radius: 10px;
+        }
+        .testimonial-card {
+            min-width: 320px;
+            max-width: 380px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .testimonial-card .stars {
+            color: var(--saffron);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+        .testimonial-card .author {
+            font-weight: 700;
+            color: var(--earthy-brown);
+            font-size: 0.9rem;
+        }
+
+        /* ============ INSTAGRAM STRIP ============ */
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.8rem;
+        }
+        .insta-item {
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: var(--cream-dark);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .insta-item:hover {
+            transform: scale(1.04);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ============ NEWSLETTER ============ */
+        .newsletter-section {
+            background: var(--deep-red);
+            color: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 3.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(232, 160, 32, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+        .newsletter-section h2 {
+            color: var(--white);
+            position: relative;
+        }
+        .newsletter-section p {
+            color: rgba(255, 255, 255, 0.85);
+            position: relative;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+            max-width: 480px;
+            margin: 1.5rem auto 0;
+            position: relative;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .newsletter-form input {
+            flex: 1;
+            min-width: 220px;
+            padding: 0.9rem 1.4rem;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .newsletter-form input:focus {
+            border-color: var(--saffron);
+            box-shadow: 0 0 0 4px rgba(232, 160, 32, 0.2);
+        }
+        .newsletter-form .btn {
+            white-space: nowrap;
+        }
+
+        /* ============ GIFT BOXES PAGE ============ */
+        .gift-tier-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .gift-tier-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .gift-tier-card.featured {
+            border: 3px solid var(--saffron);
+            transform: scale(1.03);
+            box-shadow: var(--shadow-xl);
+        }
+        .gift-tier-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+        .gift-tier-card.featured:hover {
+            transform: scale(1.03) translateY(-6px);
+        }
+        .gift-tier-card .tier-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: linear-gradient(160deg, #fdf3e0, #f5e0b7);
+        }
+        .gift-tier-card .tier-body {
+            padding: 1.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .gift-tier-card .tier-body h3 {
+            color: var(--deep-red);
+            font-size: 1.4rem;
+        }
+        .gift-tier-card .tier-body .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--earthy-brown);
+            font-family: 'Playfair Display', serif;
+        }
+        .gift-tier-card .tier-body ul {
+            list-style: none;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            line-height: 2;
+        }
+        .gift-tier-card .tier-body ul li::before {
+            content: '✓ ';
+            color: var(--forest-green);
+            font-weight: 700;
+        }
+        .occasion-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* ============ PARTNER PAGE ============ */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .partner-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .partner-benefit-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .partner-benefit-item .icon {
+            width: 50px;
+            height: 50px;
+            background: var(--saffron-pale);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .inquiry-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .inquiry-form input,
+        .inquiry-form select,
+        .inquiry-form textarea {
+            width: 100%;
+            padding: 0.85rem 1.2rem;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--border-soft);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+            background: var(--cream);
+        }
+        .inquiry-form input:focus,
+        .inquiry-form select:focus,
+        .inquiry-form textarea:focus {
+            border-color: var(--saffron);
+            box-shadow: 0 0 0 3px rgba(232, 160, 32, 0.1);
+            background: var(--white);
+        }
+        .inquiry-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* ============ ABOUT SECTION ============ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-img {
+            height: 400px;
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            background: linear-gradient(160deg, #f5e0c0, #e8d5b0);
+            box-shadow: var(--shadow-md);
+        }
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* ============ CONTACT ============ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-info-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .contact-info-item .icon {
+            width: 48px;
+            height: 48px;
+            background: var(--saffron-pale);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: white;
+            padding: 0.8rem 1.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .whatsapp-btn:hover {
+            background: #1fb855;
+            transform: translateY(-2px);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--earthy-brown);
+            color: var(--cream);
+            padding: 4rem 2rem 2rem;
+        }
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2.5rem;
+        }
+        .footer h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--saffron);
+            margin-bottom: 1rem;
+        }
+        .footer a {
+            color: var(--cream-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        .footer a:hover {
+            color: var(--saffron);
+        }
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ============ CART SIDEBAR ============ */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            max-width: 90vw;
+            height: 100vh;
+            background: var(--white);
+            z-index: 2001;
+            transition: var(--transition-slow);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-xl);
+        }
+        .cart-sidebar.active {
+            right: 0;
+        }
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-header h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--earthy-brown);
+        }
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-medium);
+        }
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-soft);
+            align-items: center;
+        }
+        .cart-item .item-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: var(--saffron-pale);
+            flex-shrink: 0;
+        }
+        .cart-item .item-info {
+            flex: 1;
+        }
+        .cart-item .item-info h4 {
+            font-size: 0.9rem;
+            color: var(--earthy-brown);
+            margin: 0;
+        }
+        .cart-item .item-info .qty {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .cart-item .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #c0392b;
+            font-size: 1.1rem;
+        }
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-soft);
+        }
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--earthy-brown);
+        }
+        .cart-footer .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ============ WHATSAPP FLOAT ============ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 900;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* ============ TOAST ============ */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            z-index: 3000;
+            background: var(--forest-green);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .collections-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .gift-tier-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .gift-tier-card.featured {
+                transform: scale(1);
+            }
+            .gift-tier-card.featured:hover {
+                transform: translateY(-6px);
+            }
+            .recipes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .insta-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+            .partner-grid,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .brand-story {
+                grid-template-columns: 1fr;
+            }
+            .brand-story .story-img {
+                min-height: 250px;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-image .image-wrapper {
+                max-width: 320px;
+                font-size: 5rem;
+            }
+            .promise-strip-inner {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            .collections-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .gift-tier-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .recipes-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .insta-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .bestsellers-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                right: 0;
+                background: var(--cream);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 0.5rem;
+                border-bottom: 2px solid var(--border-soft);
+                box-shadow: var(--shadow-lg);
+                z-index: 999;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                display: block;
+                text-align: center;
+                padding: 0.7rem;
+                font-size: 1rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .cart-sidebar {
+                width: 100%;
+                max-width: 100vw;
+                right: -100vw;
+            }
+            .cart-sidebar.active {
+                right: 0;
+            }
+            .section {
+                padding: 3rem 1.2rem;
+            }
+            .section-full {
+                padding: 3rem 1.2rem;
+            }
+            .brand-story .story-content {
+                padding: 2rem;
+            }
+            .newsletter-section {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .bestsellers-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+            .product-card .product-img {
+                height: 150px;
+                font-size: 3.5rem;
+            }
+            .product-card .product-body {
+                padding: 0.9rem;
+            }
+            .product-card .product-body h3 {
+                font-size: 0.85rem;
+            }
+            .promise-strip-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .promise-item .icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .promise-item h4 {
+                font-size: 0.7rem;
+            }
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            .insta-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">
+                <span class="logo-icon">🌶</span> MasalaBox Co.
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active" data-nav="home">Home</a></li>
+                <li><a href="#shop" data-nav="shop">Shop</a></li>
+                <li><a href="#gift-boxes" data-nav="gift-boxes">Gift Boxes</a></li>
+                <li><a href="#recipes" data-nav="recipes">Recipes</a></li>
+                <li><a href="#partner" data-nav="partner">Partner & Export</a></li>
+                <li><a href="#about" data-nav="about">About Us</a></li>
+                <li><a href="#contact" data-nav="contact">Contact</a></li>
+                <li><a href="#cart-open" class="nav-cta" id="cartNavBtn">🛒 Cart (<span id="cartCountNav">0</span>)</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== CART OVERLAY & SIDEBAR ==================== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align:center;color:#aaa;padding:2rem;">Your cart is empty.<br>Start adding some spice! 🌶</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <a href="#checkout" class="btn btn-primary" onclick="alert('Checkout would be handled by Shopify/Razorpay in production.')">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST ==================== -->
+    <div class="toast" id="toast">Added to cart! 🎉</div>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-inner">
+            <div class="hero-content">
+                <span class="accent-label">Farm to Kitchen · Since 1998</span>
+                <h1>Real Taste for <span>Real People</span></h1>
+                <p>Handcrafted Indian spice blends, sourced directly from farms. No preservatives, no additives — just generations of flavor in every pinch.</p>
+                <div class="hero-buttons">
+                    <a href="#shop" class="btn btn-primary">Shop Now</a>
+                    <a href="#gift-boxes" class="btn btn-outline">Explore Gift Boxes</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-wrapper">🌶️</div>
+                <span class="floating-spice">🧄</span>
+                <span class="floating-spice">🫚</span>
+                <span class="floating-spice">✨</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BRAND PROMISE STRIP ==================== -->
+    <div class="promise-strip">
+        <div class="promise-strip-inner">
+            <div class="promise-item">
+                <div class="icon">🚫</div>
+                <h4>No Preservatives</h4>
+            </div>
+            <div class="promise-item">
+                <div class="icon">🌾</div>
+                <h4>Farm Sourced</h4>
+            </div>
+            <div class="promise-item">
+                <div class="icon">🤲</div>
+                <h4>Handcrafted Blends</h4>
+            </div>
+            <div class="promise-item">
+                <div class="icon">📦</div>
+                <h4>Free Shipping*</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FEATURED COLLECTIONS ==================== -->
+    <section class="section" id="collections">
+        <div class="section-header">
+            <span class="accent-label">Curated Collections</span>
+            <h2>Explore Our Range</h2>
+            <p>From daily essentials to luxury gift boxes — find the perfect spice for every kitchen.</p>
+        </div>
+        <div class="collections-grid">
+            <a href="#gift-boxes" class="collection-card">
+                <div class="card-img">🎁</div>
+                <div class="card-body">
+                    <h3>Gift Boxes</h3>
+                    <p>Premium curated gifting for every occasion</p>
+                </div>
+            </a>
+            <a href="#shop" class="collection-card">
+                <div class="card-img">🫙</div>
+                <div class="card-body">
+                    <h3>Daily Spices</h3>
+                    <p>Turmeric, cumin, chilli &amp; more essentials</p>
+                </div>
+            </a>
+            <a href="#shop" class="collection-card">
+                <div class="card-img">🍛</div>
+                <div class="card-body">
+                    <h3>Spice Blends</h3>
+                    <p>Garam masala, tikka masala, chaat masala</p>
+                </div>
+            </a>
+            <a href="#shop" class="collection-card">
+                <div class="card-img">🍵</div>
+                <div class="card-body">
+                    <h3>Herbal Teas & Kadhas</h3>
+                    <p>Immunity, digestion &amp; detox blends</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== BESTSELLERS (SHOP SECTION) ==================== -->
+    <section class="section" id="shop">
+        <div class="section-header">
+            <span class="accent-label">Bestsellers</span>
+            <h2>What Everyone's Loving</h2>
+            <p>Our most popular picks, loved by home cooks and chefs alike.</p>
+        </div>
+        <div class="bestsellers-grid" id="bestsellersGrid">
+            <!-- Products rendered by JS -->
+        </div>
+    </section>
+
+    <!-- ==================== BRAND STORY ==================== -->
+    <section class="section" id="story">
+        <div class="brand-story">
+            <div class="story-img">🧑‍🌾</div>
+            <div class="story-content">
+                <span class="accent-label">Why We Started</span>
+                <h2>A Legacy of Flavor</h2>
+                <p>It began in our grandmother's kitchen in Kerala, where the aroma of freshly roasted spices filled the air. For three generations, we've perfected the art of blending — sourcing the finest turmeric from Tamil Nadu, cardamom from Kerala, and chillies from Andhra Pradesh.</p>
+                <p>Today, MasalaBox Co. brings that same farm-to-kitchen promise to your home. Every blend is handcrafted, every ingredient traceable, and every box packed with love.</p>
+                <a href="#about" class="btn btn-outline btn-sm" style="align-self:flex-start;">Read Our Full Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== RECIPE HIGHLIGHTS ==================== -->
+    <section class="section" id="recipes">
+        <div class="section-header">
+            <span class="accent-label">From Our Kitchen</span>
+            <h2>Recipes Using Our Blends</h2>
+            <p>Delicious, easy-to-follow recipes that bring out the best in our spices.</p>
+        </div>
+        <div class="recipes-grid">
+            <a href="#" class="recipe-card" onclick="alert('Full recipe would open on the blog page.')">
+                <div class="recipe-img">🍛</div>
+                <div class="recipe-body">
+                    <span class="accent-tag">Tikka Masala</span>
+                    <h3>How to Make Malai Paneer Tikka</h3>
+                    <p>Creamy, smoky, and perfectly spiced — a restaurant-style dish at home.</p>
+                </div>
+            </a>
+            <a href="#" class="recipe-card" onclick="alert('Full recipe would open on the blog page.')">
+                <div class="recipe-img">🍲</div>
+                <div class="recipe-body">
+                    <span class="accent-tag">Garam Masala</span>
+                    <h3>Authentic Dal Tadka with Garam Masala</h3>
+                    <p>The ultimate comfort food — rich, aromatic, and soul-warming.</p>
+                </div>
+            </a>
+            <a href="#" class="recipe-card" onclick="alert('Full recipe would open on the blog page.')">
+                <div class="recipe-img">🍗</div>
+                <div class="recipe-body">
+                    <span class="accent-tag">Biryani Masala</span>
+                    <h3>Hyderabadi Vegetable Biryani</h3>
+                    <p>Layered rice perfection with our signature biryani blend.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="section-full" style="background:var(--white);">
+        <div style="max-width:var(--max-width);margin:0 auto;padding:0 2rem;">
+            <div class="section-header">
+                <span class="accent-label">Testimonials</span>
+                <h2>Loved by Spice Enthusiasts</h2>
+            </div>
+            <div class="testimonials-scroll">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The garam masala is incredible — it reminds me of my mother's kitchen. Pure, aromatic, and absolutely authentic."</p>
+                    <span class="author">— Priya S., Mumbai</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"I ordered the Diwali gift box for my team — everyone raved about the quality and packaging. Will order again!"</p>
+                    <span class="author">— Rajesh K., Bengaluru</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Living in London, it's hard to find authentic Indian spices. MasalaBox Co. delivers globally and the freshness is unmatched."</p>
+                    <span class="author">— Anita M., London</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Their tikka masala blend is my secret weapon for dinner parties. Everyone asks for the recipe!"</p>
+                    <span class="author">— Chef Vikram, Delhi</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The herbal kadha blend helped me through cold season. Tastes amazing and actually works."</p>
+                    <span class="author">— Sneha P., Pune</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INSTAGRAM / UGC ==================== -->
+    <section class="section">
+        <div class="section-header">
+            <span class="accent-label">Follow Us @MasalaBoxCo</span>
+            <h2>From Our Community</h2>
+        </div>
+        <div class="insta-grid">
+            <div class="insta-item">📸</div>
+            <div class="insta-item">🍽️</div>
+            <div class="insta-item">🧆</div>
+            <div class="insta-item">🫕</div>
+            <div class="insta-item">🥘</div>
+            <div class="insta-item">✨</div>
+        </div>
+    </section>
+
+    <!-- ==================== NEWSLETTER ==================== -->
+    <section class="section">
+        <div class="newsletter-section">
+            <h2>Get 10% Off Your First Order</h2>
+            <p>Join our spice-loving community. Recipes, exclusive deals, and a welcome discount delivered to your inbox.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing! Check your email for the discount code. 🎉'); this.reset();">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn btn-saffron">Subscribe & Save</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== GIFT BOXES PAGE ==================== -->
+    <section class="section" id="gift-boxes">
+        <div class="section-header">
+            <span class="accent-label">Premium Gifting</span>
+            <h2>Curated Gift Boxes</h2>
+            <p>Thoughtfully packaged spice collections for every occasion — from intimate gatherings to grand celebrations.</p>
+        </div>
+        <div class="gift-tier-grid">
+            <div class="gift-tier-card">
+                <div class="tier-img">🎁</div>
+                <div class="tier-body">
+                    <h3>The Heritage Box</h3>
+                    <p>6 essential spices in kraft packaging with gold foil accents.</p>
+                    <div class="price">₹899</div>
+                    <ul>
+                        <li>Turmeric, Cumin, Red Chilli</li>
+                        <li>Coriander, Garam Masala, Chaat Masala</li>
+                        <li>Recipe卡片 included</li>
+                        <li>Perfect for everyday gifting</li>
+                    </ul>
+                    <button class="btn btn-primary btn-sm add-to-cart-btn" data-name="The Heritage Box" data-price="899">Add to Cart</button>
+                </div>
+            </div>
+            <div class="gift-tier-card featured">
+                <div class="tier-img" style="background:linear-gradient(160deg, #fef3e0, #fadf9e);">🌟</div>
+                <div class="tier-body">
+                    <h3>The Festive Box</h3>
+                    <p>12 premium blends in a handcrafted wooden crate — the ultimate celebration gift.</p>
+                    <div class="price">₹2,499</div>
+                    <ul>
+                        <li>All Heritage spices + 6 exclusive blends</li>
+                        <li>Biryani Masala, Tikka Masala, Kadha Mix</li>
+                        <li>Personalized gift message</li>
+                        <li>Ideal for Diwali, Eid, Weddings</li>
+                    </ul>
+                    <button class="btn btn-saffron btn-sm add-to-cart-btn" data-name="The Festive Box" data-price="2499">Add to Cart</button>
+                </div>
+            </div>
+            <div class="gift-tier-card">
+                <div class="tier-img" style="background:linear-gradient(160deg, #f5ece0, #e0cfb5);">💎</div>
+                <div class="tier-body">
+                    <h3>The Premium Collection</h3>
+                    <p>18 rare spices &amp; blends in a luxury brass-accented chest.</p>
+                    <div class="price">₹4,999</div>
+                    <ul>
+                        <li>All Festive spices + 6 rare varieties</li>
+                        <li>Saffron, Black Cardamom, Stone Flower</li>
+                        <li>Engraved brass spoon included</li>
+                        <li>For corporate &amp; luxury gifting</li>
+                    </ul>
+                    <button class="btn btn-primary btn-sm add-to-cart-btn" data-name="The Premium Collection" data-price="4999">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="occasion-tags">
+            <span class="accent-tag">🪔 Diwali</span>
+            <span class="accent-tag">💍 Wedding</span>
+            <span class="accent-tag">🏢 Corporate</span>
+            <span class="accent-tag">🎂 Birthday</span>
+            <span class="accent-tag">🌙 Eid</span>
+            <span class="accent-tag">🎄 Christmas</span>
+        </div>
+    </section>
+
+    <!-- ==================== PARTNER & EXPORT PAGE ==================== -->
+    <section class="section" id="partner">
+        <div class="section-header">
+            <span class="accent-label">B2B & Export</span>
+            <h2>Partner With Us</h2>
+            <p>Quality spices for restaurants, exporters, and private label brands worldwide.</p>
+        </div>
+        <div class="partner-grid">
+            <div class="partner-benefits">
+                <div class="partner-benefit-item">
+                    <div class="icon">✅</div>
+                    <div>
+                        <h4 style="color:var(--earthy-brown);">Consistent Quality</h4>
+                        <p style="font-size:0.9rem;">Rigorous sourcing and blending standards ensure every batch meets our premium benchmark.</p>
+                    </div>
+                </div>
+                <div class="partner-benefit-item">
+                    <div class="icon">🚚</div>
+                    <div>
+                        <h4 style="color:var(--earthy-brown);">Reliable Logistics</h4>
+                        <p style="font-size:0.9rem;">Pan-India and international shipping with full regulatory and labeling support.</p>
+                    </div>
+                </div>
+                <div class="partner-benefit-item">
+                    <div class="icon">🏷️</div>
+                    <div>
+                        <h4 style="color:var(--earthy-brown);">Private Label Ready</h4>
+                        <p style="font-size:0.9rem;">Custom branding for restaurant chains and retail — your label, our quality.</p>
+                    </div>
+                </div>
+                <div class="partner-benefit-item">
+                    <div class="icon">💰</div>
+                    <div>
+                        <h4 style="color:var(--earthy-brown);">Competitive Pricing</h4>
+                        <p style="font-size:0.9rem;">Volume-based pricing with flexible MOQs for businesses of all sizes.</p>
+                    </div>
+                </div>
+            </div>
+            <form class="inquiry-form" onsubmit="event.preventDefault(); alert('Inquiry submitted! Our B2B team will reach out within 24 hours.'); this.reset();">
+                <h3 style="color:var(--deep-red);font-family:'Playfair Display',serif;">Business Inquiry</h3>
+                <input type="text" placeholder="Company Name *" required>
+                <input type="text" placeholder="Country *" required>
+                <input type="text" placeholder="Estimated Volume (kg/month)">
+                <select>
+                    <option value="">Product Interest</option>
+                    <option>Daily Spice Essentials</option>
+                    <option>Spice Blends</option>
+                    <option>Herbal Teas & Kadhas</option>
+                    <option>Gift Boxes / Private Label</option>
+                    <option>All of the above</option>
+                </select>
+                <textarea placeholder="Tell us about your requirements..."></textarea>
+                <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT US ==================== -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <span class="accent-label">Our Heritage</span>
+            <h2>About MasalaBox Co.</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-img">🌿</div>
+            <div class="about-content">
+                <p><strong>MasalaBox Co.</strong> was born from a simple belief: that the world deserves to taste Indian spices the way they were meant to be — pure, fresh, and full of soul.</p>
+                <p>We work directly with over 200 smallholder farmers across India, ensuring fair prices and sustainable practices. Every spice is sun-dried, stone-ground, and blended by hand in small batches.</p>
+                <p>From our family to yours — welcome to the MasalaBox Co. family.</p>
+                <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:0.5rem;">
+                    <div><strong style="font-size:2rem;color:var(--deep-red);">200+</strong><br><span style="font-size:0.85rem;color:var(--text-light);">Farm Partners</span></div>
+                    <div><strong style="font-size:2rem;color:var(--deep-red);">25+</strong><br><span style="font-size:0.85rem;color:var(--text-light);">Countries</span></div>
+                    <div><strong style="font-size:2rem;color:var(--deep-red);">3</strong><br><span style="font-size:0.85rem;color:var(--text-light);">Generations</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="section" id="contact">
+        <div class="section-header">
+            <span class="accent-label">Get In Touch</span>
+            <h2>Contact Us</h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <div class="icon">📍</div>
+                    <div><strong style="color:var(--earthy-brown);">Address</strong><br><span style="font-size:0.9rem;color:var(--text-light);">Spice Valley, Kochi, Kerala — 682001, India</span></div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="icon">📧</div>
+                    <div><strong style="color:var(--earthy-brown);">Email</strong><br><span style="font-size:0.9rem;color:var(--text-light);">hello@masalaboxco.com</span></div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="icon">📞</div>
+                    <div><strong style="color:var(--earthy-brown);">Phone</strong><br><span style="font-size:0.9rem;color:var(--text-light);">+91 99999 88888</span></div>
+                </div>
+                <a href="https://wa.me/919999988888" class="whatsapp-btn" target="_blank" rel="noopener">
+                    💬 Chat on WhatsApp
+                </a>
+            </div>
+            <form class="inquiry-form" onsubmit="event.preventDefault(); alert('Message sent! We will get back to you shortly.'); this.reset();">
+                <h3 style="color:var(--deep-red);font-family:'Playfair Display',serif;">Send a Message</h3>
+                <input type="text" placeholder="Your Name *" required>
+                <input type="email" placeholder="Your Email *" required>
+                <textarea placeholder="Your Message *" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <h4>MasalaBox Co.</h4>
+                <p style="color:var(--cream-dark);font-size:0.9rem;">Premium Indian spices — farm to kitchen, generations of flavor, real taste for real people.</p>
+                <p style="color:var(--cream-dark);font-size:0.85rem;">FSSAI Licensed · ISO 22000 Certified</p>
+            </div>
+            <div>
+                <h4>Shop</h4>
+                <a href="#shop">Daily Spices</a>
+                <a href="#shop">Spice Blends</a>
+                <a href="#shop">Herbal Teas</a>
+                <a href="#gift-boxes">Gift Boxes</a>
+                <a href="#shop">Subscription</a>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <a href="#about">About Us</a>
+                <a href="#partner">Partner & Export</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Returns & Refunds</a>
+            </div>
+            <div>
+                <h4>Connect</h4>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Pinterest</a>
+                <a href="#">YouTube</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 MasalaBox Co. All rights reserved. | Designed with ❤️ in India
+        </div>
+    </footer>
+
+    <!-- ==================== WHATSAPP FLOAT ==================== -->
+    <a href="https://wa.me/919999988888" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬</a>
+
+    <script>
+        // ============ PRODUCT DATA ============
+        const products = [
+            { id: 1, name: 'Premium Turmeric Powder', emoji: '🟡', price: 249, original: 320, rating: 5, badge: 'Bestseller',
+                category: 'daily' },
+            { id: 2, name: 'Garam Masala Blend', emoji: '🍛', price: 299, original: 380, rating: 5, badge: 'Top Rated',
+                category: 'blend' },
+            { id: 3, name: 'Kashmiri Red Chilli', emoji: '🌶️', price: 199, original: null, rating: 4, badge: null,
+                category: 'daily' },
+            { id: 4, name: 'Tikka Masala Blend', emoji: '🍗', price: 349, original: 420, rating: 5, badge: 'Popular',
+                category: 'blend' },
+            { id: 5, name: 'Organic Cumin Seeds', emoji: '🫘', price: 179, original: null, rating: 4, badge: null,
+                category: 'daily' },
+            { id: 6, name: 'Immunity Kadha Mix', emoji: '🍵', price: 399, original: 499, rating: 5, badge: 'New',
+                category: 'tea' },
+        ];
+
+        // ============ CART STATE ============
+        let cart = [];
+
+        function loadCart() {
+            const saved = localStorage.getItem('masalabox_cart');
+            if (saved) {
+                try { cart = JSON.parse(saved); } catch (e) { cart = []; }
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('masalabox_cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            document.getElementById('cartCountNav').textContent = totalItems;
+            document.getElementById('cartTotal').textContent = '₹' + totalPrice.toLocaleString('en-IN');
+
+            const cartItemsEl = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML =
+                    '<p style="text-align:center;color:#aaa;padding:2rem;">Your cart is empty.<br>Start adding some spice! 🌶</p>';
+            } else {
+                cartItemsEl.innerHTML = cart.map((item, idx) => `
+                <div class="cart-item">
+                  <div class="item-icon">${item.emoji || '🫙'}</div>
+                  <div class="item-info">
+                    <h4>${item.name}</h4>
+                    <span class="qty">Qty: ${item.qty} × ₹${item.price}</span>
+                  </div>
+                  <button class="remove-btn" onclick="removeFromCart(${idx})" title="Remove">🗑️</button>
+                </div>
+              `).join('');
+            }
+        }
+
+        function addToCart(productName, productPrice, productEmoji) {
+            const existing = cart.find(item => item.name === productName);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name: productName, price: productPrice, qty: 1, emoji: productEmoji || '🫙' });
+            }
+            saveCart();
+            updateCartUI();
+            showToast();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('active');
+            document.getElementById('cartOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ============ RENDER BESTSELLERS ============
+        function renderBestsellers() {
+            const grid = document.getElementById('bestsellersGrid');
+            grid.innerHTML = products.map(p => `
+            <div class="product-card">
+              ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+              <div class="product-img">${p.emoji}</div>
+              <div class="product-body">
+                <h3>${p.name}</h3>
+                <div class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5 - p.rating)}</div>
+                <div class="price">
+                  ₹${p.price}
+                  ${p.original ? `<span class="original">₹${p.original}</span>` : ''}
+                </div>
+                <button class="btn btn-primary btn-sm add-to-cart-btn"
+                  data-name="${p.name}"
+                  data-price="${p.price}"
+                  data-emoji="${p.emoji}">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          `).join('');
+
+            // Attach event listeners
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const name = this.getAttribute('data-name');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    const emoji = this.getAttribute('data-emoji') || '🫙';
+                    addToCart(name, price, emoji);
+                    this.textContent = 'Added! ✓';
+                    this.style.background = '#2D5016';
+                    setTimeout(() => {
+                        this.textContent = 'Add to Cart';
+                        this.style.background = '';
+                    }, 1500);
+                });
+            });
+        }
+
+        // ============ NAVIGATION ============
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const navbar = document.getElementById('navbar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartCloseBtn = document.getElementById('cartClose');
+        const cartNavBtn = document.getElementById('cartNavBtn');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile nav when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Cart open/close
+        cartNavBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCart();
+        });
+        cartCloseBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+
+        // Scroll behavior for navbar
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Update active nav link based on scroll position
+            const sections = document.querySelectorAll('section[id], .hero[id]');
+            const navAs = navLinks.querySelectorAll('a[data-nav]');
+            let current = 'home';
+            sections.forEach(section => {
+                const top = section.getBoundingClientRect().top;
+                if (top < 200 && top > -400) {
+                    current = section.id || 'home';
+                }
+            });
+            navAs.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('data-nav') === current);
+            });
+        });
+
+        // ============ INIT ============
+        function init() {
+            loadCart();
+            updateCartUI();
+            renderBestsellers();
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        // ============ KEYBOARD ESC TO CLOSE CART ============
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeCart();
+        });
+
+        console.log('🌶️ MasalaBox Co. — Premium Indian Spice Brand');
+        console.log('All sections loaded: Home | Shop | Gift Boxes | Recipes | Partner & Export | About | Contact');
+        console.log('Cart functionality active. Click "Add to Cart" on any product!');
+    </script>
+</body>
+</html>
