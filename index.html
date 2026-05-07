@@ -20,7 +20,6 @@
       --star: #f4b400;
     }
 
-    /* Animations */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -36,7 +35,6 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* Header */
     header {
       background: white; padding: 0.8rem 1.2rem; display: flex;
       align-items: center; justify-content: space-between; gap: 0.8rem;
@@ -65,7 +63,6 @@
       justify-content: center; font-size: 0.65rem; font-weight: bold;
     }
 
-    /* Navigation */
     nav {
       background: white; padding: 0.6rem 1.2rem; border-bottom: 1px solid var(--border);
       overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;
@@ -81,7 +78,6 @@
       background: var(--primary-light); color: var(--primary); font-weight: 600;
     }
 
-    /* Cover Image Hero */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
       url('https://images.unsplash.com/photo-1596040033229-a9821ebd4a2c?w=1200&auto=format&fit=crop') center/cover no-repeat;
@@ -92,25 +88,22 @@
     .hero h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; text-shadow: 0 2px 6px rgba(0,0,0,0.2); }
     .hero p { font-size: 1rem; opacity: 0.95; }
 
-    /* Main Container */
     .container { max-width: 1200px; margin: auto; padding: 0.8rem; }
     .section-title { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 1rem; display: flex; align-items: center; gap: 0.4rem; color: var(--primary); }
 
-    /* Products Grid */
     .products-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem;
     }
     .product-card {
       background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.03);
       transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border); cursor: pointer;
     }
     .product-card:active { transform: scale(0.98); }
     .product-img {
       height: 140px; background-size: cover; background-position: center;
       border-bottom: 1px solid var(--border); position: relative;
     }
-    /* Floating quick‑add icon on product image */
     .quick-add {
       position: absolute; bottom: 8px; right: 8px;
       width: 32px; height: 32px; border-radius: 50%;
@@ -125,17 +118,13 @@
     .product-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; line-height: 1.2; }
     .price { font-weight: 700; color: var(--primary); font-size: 1.1rem; margin: 0.2rem 0 0.6rem; }
 
-    /* Quantity control area inside product card */
-    .cart-control-area {
-      margin-top: auto; min-height: 38px; display: flex; align-items: center;
-    }
+    .cart-control-area { margin-top: auto; min-height: 38px; display: flex; align-items: center; }
     .add-btn {
       background: var(--accent); color: white; border: none; padding: 0.5rem 0.8rem;
       border-radius: 30px; font-weight: 600; font-size: 0.8rem; cursor: pointer;
       transition: 0.2s; width: 100%; display: flex; align-items: center; justify-content: center;
       gap: 0.3rem;
     }
-    .add-btn:active { background: #e55a2b; }
     .quantity-selector {
       display: flex; align-items: center; justify-content: space-between; width: 100%;
       background: var(--accent-light); border-radius: 30px; padding: 0.2rem;
@@ -146,11 +135,45 @@
       color: var(--accent); transition: 0.2s; font-weight: bold; flex-shrink: 0;
     }
     .qty-btn:active { background: var(--accent); color: white; border-color: var(--accent); }
-    .qty-number {
-      font-weight: 600; font-size: 0.9rem; color: var(--text); margin: 0 0.3rem;
-    }
+    .qty-number { font-weight: 600; font-size: 0.9rem; color: var(--text); margin: 0 0.3rem; }
 
-    /* Cart Sidebar */
+    /* Product Detail Modal */
+    .product-detail-modal {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+      background: white; border-radius: 24px; padding: 1.5rem; z-index: 1002;
+      width: 92%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease;
+    }
+    .product-detail-modal.active { transform: translate(-50%, -50%) scale(1); }
+    .detail-close {
+      position: absolute; top: 12px; right: 16px; background: none; border: none;
+      font-size: 1.8rem; cursor: pointer; color: #888;
+    }
+    .detail-img {
+      width: 100%; height: 220px; background-size: cover; background-position: center;
+      border-radius: 16px; margin-bottom: 1rem;
+    }
+    .detail-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .detail-price { font-size: 1.6rem; font-weight: 700; color: var(--primary); margin-bottom: 0.8rem; }
+    .detail-desc { color: #555; margin-bottom: 1.2rem; line-height: 1.5; font-size: 0.95rem; }
+    .detail-control-area { display: flex; align-items: center; min-height: 48px; }
+    .detail-add-btn {
+      background: var(--accent); color: white; border: none; padding: 0.8rem 2rem;
+      border-radius: 30px; font-weight: 600; font-size: 1rem; cursor: pointer; width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+    .detail-quantity-selector {
+      display: flex; align-items: center; justify-content: space-between; width: 100%;
+      background: var(--accent-light); border-radius: 30px; padding: 0.3rem;
+    }
+    .detail-qty-btn {
+      background: white; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.3rem;
+      color: var(--accent); transition: 0.2s; font-weight: bold; flex-shrink: 0;
+    }
+    .detail-qty-btn:active { background: var(--accent); color: white; border-color: var(--accent); }
+    .detail-qty-number { font-weight: 600; font-size: 1.1rem; color: var(--text); margin: 0 0.5rem; }
+
     .cart-sidebar {
       position: fixed; top: 0; right: -100%; width: 100%; max-width: 420px; height: 100%;
       background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.1); z-index: 1000;
@@ -164,7 +187,6 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem;
     }
-    .cart-item span { font-weight: 500; }
     .cart-item .qty-control {
       display: flex; align-items: center; gap: 0.4rem;
     }
@@ -184,7 +206,6 @@
     }
     .overlay.active { display: block; }
 
-    /* Floating Cart Icon (modern) */
     .floating-cart {
       position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px;
       background: var(--accent); border-radius: 50%; display: flex; align-items: center;
@@ -199,7 +220,6 @@
       justify-content: center; font-size: 0.7rem; font-weight: bold; border: 2px solid white;
     }
 
-    /* Payment Modal */
     .payment-modal {
       position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
       background: white; border-radius: 20px; padding: 1.5rem; z-index: 1002;
@@ -216,7 +236,6 @@
     .success-msg { display: none; text-align: center; animation: bounceIn 0.5s; }
     .tracking-info { margin: 1rem 0; padding: 0.7rem; background: var(--primary-light); border-radius: 12px; font-size: 0.85rem; }
 
-    /* Reviews */
     .reviews-container { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.8rem 0; -webkit-overflow-scrolling: touch; }
     .review-card {
       min-width: 230px; background: white; padding: 1.2rem; border-radius: 16px;
@@ -227,12 +246,10 @@
     .review-text { font-style: italic; margin-bottom: 0.6rem; color: #444; }
     .review-author { font-weight: 600; color: var(--primary); }
 
-    /* FAQ */
     .faq-item { border-bottom: 1px solid var(--border); margin-bottom: 0.5rem; }
     .faq-question {
       background: none; border: none; width: 100%; text-align: left; padding: 0.8rem 0;
       font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between;
-      color: var(--text);
     }
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s; color: #555; padding-left: 0.5rem; font-size: 0.9rem; }
     .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 0.8rem; }
@@ -240,7 +257,6 @@
 
     footer { background: white; border-top: 1px solid var(--border); text-align: center; padding: 1.2rem; color: #888; margin-top: 2rem; font-size: 0.85rem; }
 
-    /* Additional Mobile Optimizations */
     @media (max-width: 480px) {
       header { padding: 0.6rem 1rem; }
       .logo h1 { font-size: 1.3rem; }
@@ -260,6 +276,7 @@
       .floating-cart { width: 50px; height: 50px; bottom: 16px; right: 16px; }
       .floating-cart-icon { font-size: 22px; }
       .quick-add { width: 28px; height: 28px; font-size: 1rem; bottom: 6px; right: 6px; }
+      .detail-img { height: 180px; }
     }
   </style>
 </head>
@@ -319,6 +336,12 @@
   <div id="faqContainer" class="reveal"></div>
 </main>
 
+<!-- Product Detail Modal -->
+<div class="product-detail-modal" id="productDetailModal">
+  <button class="detail-close" onclick="closeAllModals()">✕</button>
+  <div id="detailContent"></div>
+</div>
+
 <!-- Cart Sidebar -->
 <div class="cart-sidebar" id="cartSidebar">
   <button class="close-cart" onclick="toggleCart()">✕</button>
@@ -334,15 +357,15 @@
     <h3>Secure Checkout</h3>
     <button class="pay-btn" onclick="payWithRazorpay()">🔒 Pay with Razorpay (Test)</button>
     <button class="pay-btn" onclick="showFakeCardForm()" style="background:#888;">💳 Demo Card Pay</button>
-    <button onclick="closePaymentModal()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none;">Cancel</button>
+    <button onclick="closeAllModals()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none;">Cancel</button>
   </div>
   <div id="fakeCardForm" style="display:none;">
     <h3>Demo Card</h3>
     <input type="text" placeholder="Card Number" value="4111 1111 1111 1111">
     <input type="text" placeholder="Name">
-    <div style="display:flex; gap:0.5rem;"><input placeholder="MM/YY" value="12/26"><input placeholder="CVV" value="123"></div>
+    <div style="display:flex; gap:0.5rem;"><input id="mm" placeholder="MM/YY" value="12/26"><input id="cvv" placeholder="CVV" value="123"></div>
     <button class="pay-btn" onclick="processFakePayment()">Pay ₹<span id="demoAmount"></span></button>
-    <button onclick="closePaymentModal()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none;">Cancel</button>
+    <button onclick="closeAllModals()" style="background:none; color:#888; width:100%; margin-top:0.5rem; border:none;">Cancel</button>
   </div>
   <div class="success-msg" id="successMsg">
     <div style="font-size:2.5rem;">✅</div>
@@ -354,7 +377,7 @@
       Courier: <span id="courierName"></span><br>
       <a href="#" target="_blank" id="trackingLink">Track Online</a>
     </div>
-    <button onclick="closePaymentModal(); clearCart();" style="margin-top:1rem; padding:0.5rem 1rem; border:none; background:var(--primary); color:white; border-radius:20px;">Continue Shopping</button>
+    <button onclick="closeAllModals(); clearCart();" style="margin-top:1rem; padding:0.5rem 1rem; border:none; background:var(--primary); color:white; border-radius:20px;">Continue Shopping</button>
   </div>
 </div>
 
@@ -364,22 +387,22 @@
   const RAZORPAY_KEY = 'rzp_test_SmUfrIGt9NWD7J';
 
   const products = [
-    { id:1, name:"Basmati Rice – Premium", price:110, category:"Grocery & Staples", img:"https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
-    { id:2, name:"Desi Ghee (1L)", price:480, category:"Grocery & Staples", img:"https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400" },
-    { id:3, name:"Rajma Chitra", price:145, category:"Grocery & Staples", img:"https://images.unsplash.com/photo-1551462147-ff2907bfdce1?w=400" },
-    { id:4, name:"Udhampur Kaladi Cheese", price:220, category:"Local Specialties", img:"https://images.unsplash.com/photo-1634487359989-3e90c9432133?w=400" },
-    { id:5, name:"Akhnoor Milk Cake", price:260, category:"Local Specialties", img:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400" },
-    { id:6, name:"Kashmiri Walnuts (500g)", price:350, category:"Dry Fruits & Seeds", img:"https://images.unsplash.com/photo-1572384066832-1a7d47e7d042?w=400" },
-    { id:7, name:"Almonds (Mamra)", price:290, category:"Dry Fruits & Seeds", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
-    { id:8, name:"Jammu Tikki Masala", price:85, category:"Snacks & Beverages", img:"https://images.unsplash.com/photo-1596040033229-a9821ebd4a2c?w=400" },
-    { id:9, name:"Patisa (Sweet Flaky)", price:170, category:"Snacks & Beverages", img:"https://images.unsplash.com/photo-1558961363-fa8fdf8fe77f?w=400" },
-    { id:10, name:"Local Honey (250g)", price:210, category:"Snacks & Beverages", img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400" },
-    { id:11, name:"Saffron (Kesar) 1g", price:295, category:"Dry Fruits & Seeds", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
-    { id:12, name:"Mustard Oil (1L)", price:160, category:"Grocery & Staples", img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87fe?w=400" },
-    { id:13, name:"Pickles (Mango/Chilli)", price:130, category:"Local Specialties", img:"https://images.unsplash.com/photo-1589301762247-123df22c18c9?w=400" },
-    { id:14, name:"Rusk (Suhali) 400g", price:90, category:"Snacks & Beverages", img:"https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=400" },
-    { id:15, name:"Fruit Chaat Masala", price:70, category:"Snacks & Beverages", img:"https://images.unsplash.com/photo-1532336414038-9b0d6c1765f7?w=400" },
-    { id:16, name:"Handmade Soap", price:120, category:"Household", img:"https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=400" }
+    { id:1, name:"Basmati Rice – Premium", price:110, category:"Grocery & Staples", desc:"Long-grain aromatic rice from Jammu's finest fields.", img:"https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" },
+    { id:2, name:"Desi Ghee (1L)", price:480, category:"Grocery & Staples", desc:"Pure cow ghee, traditionally churned, rich in flavour.", img:"https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=400" },
+    { id:3, name:"Rajma Chitra", price:145, category:"Grocery & Staples", desc:"Creamy Jammu red kidney beans, perfect for curries.", img:"https://images.unsplash.com/photo-1551462147-ff2907bfdce1?w=400" },
+    { id:4, name:"Udhampur Kaladi Cheese", price:220, category:"Local Specialties", desc:"Traditional local cheese, mildly spiced, great for grilling.", img:"https://images.unsplash.com/photo-1634487359989-3e90c9432133?w=400" },
+    { id:5, name:"Akhnoor Milk Cake", price:260, category:"Local Specialties", desc:"Famous sweet delight from Akhnoor, soft and milky.", img:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400" },
+    { id:6, name:"Kashmiri Walnuts (500g)", price:350, category:"Dry Fruits & Seeds", desc:"Handpicked premium walnuts, rich in omega-3.", img:"https://images.unsplash.com/photo-1572384066832-1a7d47e7d042?w=400" },
+    { id:7, name:"Almonds (Mamra)", price:290, category:"Dry Fruits & Seeds", desc:"Crunchy mamra almonds, directly from the valleys.", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
+    { id:8, name:"Jammu Tikki Masala", price:85, category:"Snacks & Beverages", desc:"Authentic spice blend for street-style tikkis.", img:"https://images.unsplash.com/photo-1596040033229-a9821ebd4a2c?w=400" },
+    { id:9, name:"Patisa (Sweet Flaky)", price:170, category:"Snacks & Beverages", desc:"Traditional layered sweet made with pure ghee.", img:"https://images.unsplash.com/photo-1558961363-fa8fdf8fe77f?w=400" },
+    { id:10, name:"Local Honey (250g)", price:210, category:"Snacks & Beverages", desc:"Raw wild honey collected from Jammu forests.", img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400" },
+    { id:11, name:"Saffron (Kesar) 1g", price:295, category:"Dry Fruits & Seeds", desc:"Pure Kashmiri saffron strands, intense aroma.", img:"https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400" },
+    { id:12, name:"Mustard Oil (1L)", price:160, category:"Grocery & Staples", desc:"Cold-pressed mustard oil for authentic cooking.", img:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87fe?w=400" },
+    { id:13, name:"Pickles (Mango/Chilli)", price:130, category:"Local Specialties", desc:"Homemade pickles with traditional spices.", img:"https://images.unsplash.com/photo-1589301762247-123df22c18c9?w=400" },
+    { id:14, name:"Rusk (Suhali) 400g", price:90, category:"Snacks & Beverages", desc:"Crispy sweet rusks perfect with tea.", img:"https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=400" },
+    { id:15, name:"Fruit Chaat Masala", price:70, category:"Snacks & Beverages", desc:"Tangy spice mix for refreshing fruit chaats.", img:"https://images.unsplash.com/photo-1532336414038-9b0d6c1765f7?w=400" },
+    { id:16, name:"Handmade Soap", price:120, category:"Household", desc:"Natural herbal soap crafted by local artisans.", img:"https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=400" }
   ];
 
   const reviews = [
@@ -399,6 +422,7 @@
 
   let cart = [];
   let deliveryZone = 'local';
+  let openProductId = null;
 
   function getCartQty(id) {
     const item = cart.find(i => i.id === id);
@@ -431,6 +455,7 @@
   function updateCartAndUI() {
     updateCartUI();
     renderProducts(document.querySelector('.cat-list li.active')?.textContent || 'All');
+    refreshProductDetailIfOpen();
   }
 
   function updateCartUI() {
@@ -462,14 +487,14 @@
     container.innerHTML = filtered.map(p => {
       const qty = getCartQty(p.id);
       return `
-        <div class="product-card reveal">
+        <div class="product-card reveal" onclick="openProductDetail(${p.id})">
           <div class="product-img" style="background-image: url('${p.img}')">
-            <button class="quick-add" onclick="addToCart(${p.id})" aria-label="Quick add">+</button>
+            <button class="quick-add" onclick="event.stopPropagation(); addToCart(${p.id})" aria-label="Quick add">+</button>
           </div>
           <div class="product-info">
             <h4>${p.name}</h4>
             <div class="price">₹${p.price}</div>
-            <div class="cart-control-area">
+            <div class="cart-control-area" onclick="event.stopPropagation();">
               ${qty === 0 ? `
                 <button class="add-btn" onclick="addToCart(${p.id})">
                   <span>+</span> Add
@@ -488,6 +513,54 @@
     }).join('');
     observeReveal();
   }
+
+  // ----- Product Detail Modal -----
+  function openProductDetail(id) {
+    openProductId = id;
+    const product = products.find(p => p.id === id);
+    const qty = getCartQty(id);
+    const detailHtml = `
+      <div class="detail-img" style="background-image: url('${product.img}')"></div>
+      <div class="detail-name">${product.name}</div>
+      <div class="detail-price">₹${product.price}</div>
+      <p class="detail-desc">${product.desc}</p>
+      <div class="detail-control-area">
+        ${qty === 0 ? `
+          <button class="detail-add-btn" onclick="addToCart(${id})">+ Add to Cart</button>
+        ` : `
+          <div class="detail-quantity-selector">
+            <button class="detail-qty-btn" onclick="decreaseQty(${id})">−</button>
+            <span class="detail-qty-number">${qty}</span>
+            <button class="detail-qty-btn" onclick="addToCart(${id})">+</button>
+          </div>
+        `}
+      </div>
+    `;
+    document.getElementById('detailContent').innerHTML = detailHtml;
+    document.getElementById('productDetailModal').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+  }
+
+  function closeProductDetail() {
+    document.getElementById('productDetailModal').classList.remove('active');
+    openProductId = null;
+  }
+
+  function refreshProductDetailIfOpen() {
+    if (openProductId !== null && document.getElementById('productDetailModal').classList.contains('active')) {
+      openProductDetail(openProductId);
+    }
+  }
+
+  function closeAllModals() {
+    document.getElementById('cartSidebar').classList.remove('open');
+    document.getElementById('paymentModal').classList.remove('active');
+    document.getElementById('productDetailModal').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+    openProductId = null;
+  }
+
+  document.getElementById('overlay').onclick = closeAllModals;
 
   function renderReviews() {
     document.getElementById('reviewsContainer').innerHTML = reviews.map(r => `
@@ -516,11 +589,6 @@
     document.getElementById('cartSidebar').classList.toggle('open');
     document.getElementById('overlay').classList.toggle('active');
   }
-  document.getElementById('overlay').onclick = () => {
-    document.getElementById('cartSidebar').classList.remove('open');
-    document.getElementById('overlay').classList.remove('active');
-    closePaymentModal();
-  };
 
   function clearCart() {
     cart = [];
@@ -535,11 +603,6 @@
     document.getElementById('checkoutOptions').style.display = 'block';
     document.getElementById('fakeCardForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'none';
-  }
-
-  function closePaymentModal() {
-    document.getElementById('paymentModal').classList.remove('active');
-    document.getElementById('overlay').classList.remove('active');
   }
 
   function showSuccessScreen(paymentId) {
