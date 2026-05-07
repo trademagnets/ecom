@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LocalBasket – Jammu Groceries (Live Test Mode)</title>
-  <!-- Razorpay checkout script -->
+  <title>LocalBasket – Jammu Groceries (Floating Cart Icon)</title>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,7 +16,7 @@
     }
     @keyframes bounceIn {
       0% { transform: scale(0); opacity: 0; }
-      60% { transform: scale(1.05); }
+      60% { transform: scale(1.15); }
       100% { transform: scale(1); opacity: 1; }
     }
     .reveal {
@@ -104,6 +103,44 @@
     .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; }
     .overlay.active { display: block; }
 
+    /* FLOATING CART ICON (like WhatsApp) */
+    .floating-cart {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      background: #ff7043;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(255,112,67,0.4);
+      cursor: pointer;
+      z-index: 1100;
+      transition: transform 0.2s, background 0.2s;
+      border: none;
+    }
+    .floating-cart:hover { background: #e64a19; transform: scale(1.08); }
+    .floating-cart:active { transform: scale(0.95); }
+    .floating-cart-icon { font-size: 28px; color: white; line-height: 1; }
+    .floating-cart .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #1b5e20;
+      color: white;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border: 2px solid white;
+    }
+
     .payment-modal {
       position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
       background: white; border-radius: 20px; padding: 2rem; z-index: 1002;
@@ -133,12 +170,20 @@
       .hero h2 { font-size: 1.6rem; }
       .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
       .cart-sidebar { max-width: 100%; }
+      .floating-cart { width: 55px; height: 55px; bottom: 20px; right: 20px; }
+      .floating-cart-icon { font-size: 26px; }
     }
   </style>
 </head>
 <body>
 <!-- Overlay -->
 <div class="overlay" id="overlay"></div>
+
+<!-- FLOATING CART ICON (like WhatsApp) -->
+<button class="floating-cart" onclick="toggleCart()" id="floatingCartBtn">
+  <span class="floating-cart-icon">🛒</span>
+  <span class="badge" id="floatingBadge">0</span>
+</button>
 
 <!-- Header -->
 <header class="reveal">
@@ -233,11 +278,8 @@
 </footer>
 
 <script>
-  // ==================== CONFIGURATION ====================
-  // Razorpay Test Key (can be safely placed in frontend)
+  // Razorpay Test Key
   const RAZORPAY_KEY = 'rzp_test_SmUfrIGt9NWD7J';
-  // IMPORTANT: The Secret Key (BBM2QymPmFkTlQU9v89E2TWI) must NEVER be exposed in frontend.
-  // It is used only on your backend for verification and order creation.
 
   // ==================== PRODUCTS ====================
   const products = [
@@ -274,7 +316,6 @@
     { q:"Return policy?", a:"2 days on perishables, 7 days on dry goods." }
   ];
 
-  // ==================== STATE ====================
   let cart = [];
   let deliveryZone = 'local';
 
@@ -325,8 +366,10 @@
     existing ? existing.qty++ : cart.push({...product, qty: 1});
     updateCartUI();
     showToast(`${product.name} added!`);
-    document.querySelector('.cart-btn').style.animation = 'bounceIn 0.5s';
-    setTimeout(() => document.querySelector('.cart-btn').style.animation = '', 500);
+    // Bounce floating cart icon
+    const floatBtn = document.getElementById('floatingCartBtn');
+    floatBtn.style.animation = 'bounceIn 0.5s';
+    setTimeout(() => floatBtn.style.animation = '', 500);
   }
 
   function removeFromCart(id) {
@@ -335,7 +378,9 @@
   }
 
   function updateCartUI() {
-    document.getElementById('cartCount').textContent = cart.reduce((s,i) => s + i.qty, 0);
+    const totalItems = cart.reduce((s,i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = totalItems;
+    document.getElementById('floatingBadge').textContent = totalItems;
     const list = document.getElementById('cartItems');
     list.innerHTML = cart.length ? cart.map(item => `
       <li class="cart-item">
@@ -381,14 +426,12 @@
     document.getElementById('fakeCardForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
     document.getElementById('orderDetails').innerHTML = `Payment ID: ${paymentId || 'DEMO_' + Date.now()}`;
-    // Simulated Shiprocket tracking
     document.getElementById('trackingInfo').style.display = 'block';
     document.getElementById('awbNumber').textContent = 'SHIP-' + Math.floor(Math.random()*1000000);
     document.getElementById('courierName').textContent = 'Shiprocket (simulated)';
     document.getElementById('trackingLink').href = '#';
   }
 
-  // ----- Fake Card Payment (just demo) -----
   function showFakeCardForm() {
     document.getElementById('checkoutOptions').style.display = 'none';
     document.getElementById('fakeCardForm').style.display = 'block';
@@ -400,39 +443,29 @@
     showSuccessScreen('FAKE_' + Date.now());
   }
 
-  // ----- REAL RAZORPAY (test mode, no backend) -----
   function payWithRazorpay() {
     const totalAmount = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    // Open Razorpay checkout directly with test key and manual amount
-    // No order_id needed for simple test flow (order is created automatically if not provided)
     const options = {
       key: RAZORPAY_KEY,
-      amount: totalAmount * 100, // amount in paise
+      amount: totalAmount * 100,
       currency: 'INR',
       name: 'LocalBasket',
       description: 'Grocery order',
       handler: function(response) {
-        // This is a test payment – no server verification required for demo
         console.log('Payment successful:', response);
         showSuccessScreen(response.razorpay_payment_id);
         clearCart();
       },
       modal: {
-        ondismiss: function() {
-          console.log('Checkout form closed');
-        }
+        ondismiss: function() { console.log('Checkout closed'); }
       },
       prefill: {
         name: 'Test User',
         email: 'test@localbasket.com',
         contact: '9999999999'
       },
-      notes: {
-        delivery_zone: deliveryZone
-      },
-      theme: {
-        color: '#1b5e20'
-      }
+      notes: { delivery_zone: deliveryZone },
+      theme: { color: '#1b5e20' }
     };
     const rzp = new Razorpay(options);
     rzp.open();
